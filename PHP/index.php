@@ -1,4 +1,4 @@
-<?php include 'config/database.php'; ?>
+<?php require 'config/database.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,8 +8,11 @@
 </head>
 
 <body>
-    <a href="signup.php">Registrarse</a>
-    <a href="login.php">Login</a>
-    <a href="myprofile.php">Mi Perfil</a>
+    <h4>Bienvenido
+        <?php echo $_POST["username"]; ?>
+    </h4>
+    <a href="signup.php">Registrarse</a><br>
+    <a href="login.php">Login</a><br>
+    <a href="myprofile.php">Mi Perfil</a><br>
 
 </body>
