@@ -1,4 +1,12 @@
-<?php require 'config/database.php'; ?>
+<?php require 'config/database.php';
+session_start();
+
+if (!isset($_SESSION["isloggedin"]) || $_SESSION["isloggedin"] !== true) {
+    header("location: login.php");
+    exit;
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,11 +16,17 @@
 </head>
 
 <body>
-    <h4>Bienvenido
-        <?php echo $_POST["username"]; ?>
-    </h4>
-    <a href="signup.php">Registrarse</a><br>
-    <a href="login.php">Login</a><br>
-    <a href="myprofile.php">Mi Perfil</a><br>
+
+
+    <h3>Bienvenido
+        <?php
+        if ($_SESSION["isloggedin"]) {
+            echo "<b>" . htmlspecialchars($_SESSION["username"]) . "</b>";
+        }
+        ?>
+
+    </h3>
+    <a href='myprofile.php'>Mi Perfil</a><br>
+    <a href='logout.php'>Cerrar sesión</a><br>
 
 </body>

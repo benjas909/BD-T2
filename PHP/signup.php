@@ -30,7 +30,7 @@
         } else {
             $username = clean_inputs($_POST["username"]);
 
-            if ($stmt = mysqli_prepare($link, "SELECT id FROM users where username = ?")) {
+            if ($stmt = mysqli_prepare($conn, "SELECT id FROM users where username = ?")) {
                 mysqli_stmt_bind_param($stmt, "s", $username);
 
                 if (mysqli_stmt_execute($stmt)) {
@@ -58,7 +58,7 @@
         } else {
             $email = clean_inputs($_POST["email"]);
 
-            if ($stmt = mysqli_prepare($link, "SELECT email FROM users where email = ?")) {
+            if ($stmt = mysqli_prepare($conn, "SELECT email FROM users where email = ?")) {
                 mysqli_stmt_bind_param($stmt, "s", $email);
 
                 if (mysqli_stmt_execute($stmt)) {
@@ -103,7 +103,7 @@
 
     if (empty($usrNameError) && empty($emailError) && empty($passError) && empty($confirmError) && empty($bdayError)) {
 
-        if ($stmt = mysqli_prepare($link, "INSERT INTO users (username, password, email, birthday) VALUES (?, ?, ?, ?)")) {
+        if ($stmt = mysqli_prepare($conn, "INSERT INTO users (username, password, email, birthday) VALUES (?, ?, ?, ?)")) {
             mysqli_stmt_bind_param($stmt, "ssss", $param_username, $param_password, $param_email, $param_birthday);
 
             $param_username = $username;
