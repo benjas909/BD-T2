@@ -1,0 +1,92 @@
+/* .header {
+    display: flex;
+    padding: 15px;
+    align-content: flex-end;
+    gap: 1em;
+
+}
+
+
+
+.buttonMP {
+    align-self: flex-start;
+}
+
+.buttonLO {
+    align-self: flex-start;
+} */
+
+@import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Righteous;
+}
+
+
+.container {
+    width: 100%;
+    min-height: 100vh;
+    background-image: linear-gradient(rgba(62, 124, 177, 0.65),rgba(62, 124, 177, 0.65)), url(../IMG/bg-2.jpg);
+    background-size: cover;
+    background-position: center;
+    padding: 10px 8%;
+}
+
+.welcome-msg {
+    display: block;
+    /* background-color: #DCF763; */
+    padding: 20px 25px;
+    text-align: center;
+    /* font-family: Righteous; */
+    font-size: 20px;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: rgba(62, 124, 177, 0.80);
+    font-family: Righteous;
+}
+
+li {
+    float: right;
+}
+
+li a {
+    display: block;
+    padding: 16px 18px;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    
+}
+
+li a:hover {
+    background-color: #43AA8B;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    width: auto;
+    text-align: center;
+    padding: 50px;
+    align-items: center;
+    /* background-color: #DCF763; */
+
+}
+
+.item-img {
+    max-width: 30%;
+    max-height: auto;
+}
+
+/* .titletext {
+
+} */

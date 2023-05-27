@@ -10,5 +10,5 @@ $conn = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
 if ($conn === false) {
     die("ERROR: No se pudo conectar. " . mysqli_connect_error());
 }
-echo '(debug) CONECTADO A LA BASE DE DATOS.<br>'
-    ?>
+// echo '(debug) CONECTADO A LA BASE DE DATOS.<br>'
+?>

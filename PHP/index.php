@@ -1,34 +1,55 @@
-<?php require 'config/database.php';
-session_start();
-
-// Si la persona no ha iniciado sesión, se le redirecciona al login
-if (!isset($_SESSION["isloggedin"]) || $_SESSION["isloggedin"] !== true) {
-    header("location: login.php");
-    exit;
-}
-?>
-
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <title>Prestige Travels - Home </title>
-</head>
+<?php include 'header_template.php' ?>
 
 
-<body>
 
-    <h3>Bienvenido
+<!-- <div class="buttonMP">
+            <a href='myprofile.php' class="button">Mi Perfil</a><br>
+        </div>
+        <div class="buttonLO">
+            <a href='logout.php' class="button">Cerrar sesión</a><br>
+        </div> -->
+
+
+
+<div class="welcome-msg">
+    <h2>Bienvenido
         <?php
         // Se muestra el nombre del usuario 
         if ($_SESSION["isloggedin"]) {
-            echo "<b>" . htmlspecialchars($_SESSION["username"]) . "</b>";
+            echo "<b href='myprofile.php'>" . htmlspecialchars($_SESSION["username"]) . "</b>";
         }
         ?>
 
-    </h3>
-    <a href='myprofile.php'>Mi Perfil</a><br>
-    <a href='logout.php'>Cerrar sesión</a><br>
+    </h2>
 
-</body>
+</div>
+
+
+
+<h3 class="titletext">Hoteles disponibles</h3>
+<?php
+$sql = "SELECT nombre, precionoche, img FROM hotel ORDER BY hab_disp DESC LIMIT 4";
+$result = mysqli_query($conn, $sql);
+// echo "<div>";
+if ($result) {
+    while ($row = mysqli_fetch_assoc($result)) {
+        echo "<div class= 'card'>";
+        $nombre = $row['nombre'];
+        $precio = $row['precionoche'];
+        $imagen = $row['img'];
+        echo "Nombre: $nombre<br>";
+        echo "Precio/Noche: $$precio<br>";
+        echo "Imagen: <img src='$imagen' alt='Hotel Image' class='item-img'><br><br>";
+        echo "</div>";
+    }
+} else {
+
+    echo "Error executing the query: " . mysqli_error($connection);
+}
+// echo "</div>";
+?>
+</div>
+
+<?php
+include 'footer_template.php';
+?>
