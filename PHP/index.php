@@ -44,7 +44,7 @@ if ($result) {
     }
 } else {
 
-    echo "Error executing the query: " . mysqli_error($connection);
+    echo "Error executing the query: " . mysqli_error($conn);
 }
 // echo "</div>";
 ?>
