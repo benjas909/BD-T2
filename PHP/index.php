@@ -52,8 +52,9 @@ if ($result) {
         $precio = $row['precio'];
         $imagen = $row['img'];
         $source= $row['source'];
-
-        echo "<a class='hyperlink' href='info.php?src=$source&nombre=$nombre'>";
+        $url="info.php?source=" . urlencode($source) . "&nombre=" . urlencode($nombre);
+        
+        echo "<a class='hyperlink' href='$url'>";
         echo "<div class= 'card'>";
         
         echo "Nombre: $nombre<br>";
