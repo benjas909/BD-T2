@@ -87,6 +87,10 @@ li a:hover {
     max-height: auto;
 }
 
+.hyperlink {
+    color: inherit;
+    text-decoration: none;
+}
 /* .titletext {
 
 } */
