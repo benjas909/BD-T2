@@ -1,16 +1,5 @@
 <?php include 'header_template.php' ?>
 
-
-
-<!-- <div class="buttonMP">
-            <a href='myprofile.php' class="button">Mi Perfil</a><br>
-        </div>
-        <div class="buttonLO">
-            <a href='logout.php' class="button">Cerrar sesión</a><br>
-        </div> -->
-
-
-
 <div class="welcome-msg">
     <h2>Bienvenido
         <?php
@@ -28,7 +17,6 @@
 
 <h3 class="titletext">Hoteles disponibles</h3>
 <?php
-//$sql = "SELECT nombre, precionoche, img FROM hotel ORDER BY hab_disp DESC LIMIT 4";
 
 $query = "
     SELECT combinacion.nombre, combinacion.img, combinacion.precio, combinacion.source, combinacion.disponibilidad
@@ -51,20 +39,20 @@ if ($result) {
         $nombre = $row['nombre'];
         $precio = $row['precio'];
         $imagen = $row['img'];
-        $source= $row['source'];
-        $url="info.php?source=" . urlencode($source) . "&nombre=" . urlencode($nombre);
-        
+        $source = $row['source'];
+        $url = "info.php?source=" . urlencode($source) . "&nombre=" . urlencode($nombre);
+
         echo "<a class='hyperlink' href='$url'>";
         echo "<div class= 'card'>";
-        
+
         echo "Nombre: $nombre<br>";
 
         if ($source === 'hotel') {
-            echo "Precio/noche: $precio <br>";
+            echo "Precio/noche: $$precio <br>";
         } elseif ($source === 'paquete') {
-            echo "Precio/persona: $precio <br>";
+            echo "Precio/persona: $$precio <br>";
         }
-        
+
         echo "Imagen: <img src='$imagen' alt='Hotel Image' class='item-img'><br><br>";
 
         echo "</div>";

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 28, 2023 at 07:46 AM
+-- Generation Time: Jun 03, 2023 at 01:56 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -20,6 +20,30 @@ SET time_zone = "+00:00";
 --
 -- Database: `prestigetravels`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cart`
+--
+
+CREATE TABLE `cart` (
+  `cart_id` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cart_item`
+--
+
+CREATE TABLE `cart_item` (
+  `id` int(11) NOT NULL,
+  `id_hotel` int(11) DEFAULT NULL,
+  `id_pack` int(11) DEFAULT NULL,
+  `ishotel` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -132,20 +156,20 @@ CREATE TABLE `hotel` (
 --
 
 INSERT INTO `hotel` (`id_hotel`, `nombre`, `ciudad`, `precionoche`, `img`, `estrellas`, `hab_totales`, `hab_disp`, `parking`, `piscina`, `lavanderia`, `mascotas`, `desayuno`) VALUES
-(1, 'Richman Hotel', 1, 37944, '/BD-T2/IMG/image1.jpg', 2, 53, 49, 1, 1, 1, 0, 0),
-(2, 'Hotel Jefferson', 1, 26991, '/BD-T2/IMG/image2.jpg', 4, 106, 106, 1, 1, 1, 1, 1),
-(3, 'Templar Hotel', 1, 64118, '/BD-T2/IMG/image3.jpg', 3, 102, 56, 1, 0, 0, 1, 1),
-(4, 'Hotel Ocean View', 2, 46381, '/BD-T2/IMG/image4.jpg', 5, 150, 81, 1, 1, 1, 1, 1),
-(5, 'Hotel Moist Palms', 2, 61975, '/BD-T2/IMG/image5.jpg', 0, 154, 104, 1, 0, 1, 0, 0),
+(1, 'Richman Hotel', 1, 37944, '/BD-T2/IMG/image1.jpg', 2, 53, 10, 1, 1, 1, 0, 0),
+(2, 'Hotel Jefferson', 1, 26991, '/BD-T2/IMG/image2.jpg', 4, 106, 76, 1, 1, 1, 1, 1),
+(3, 'Templar Hotel', 1, 64118, '/BD-T2/IMG/image3.jpg', 3, 102, 12, 1, 0, 0, 1, 1),
+(4, 'Hotel Ocean View', 2, 46381, '/BD-T2/IMG/image4.jpg', 5, 150, 20, 1, 1, 1, 1, 1),
+(5, 'Hotel Moist Palms', 2, 61975, '/BD-T2/IMG/image5.jpg', 0, 154, 22, 1, 0, 1, 0, 0),
 (6, 'Majestic Hotel', 4, 52217, '/BD-T2/IMG/image6.jpg', 4, 92, 14, 1, 0, 0, 1, 1),
 (7, 'Indian Inn Hotel', 8, 36571, '/BD-T2/IMG/image7.jpg', 2, 82, 2, 0, 0, 0, 0, 0),
 (8, 'Nicoise Hotel', 4, 91168, '/BD-T2/IMG/image8.jpg', 5, 118, 2, 1, 1, 1, 0, 1),
 (9, 'Old Bullworth Vale Hotel', 7, 48146, '/BD-T2/IMG/image9.jpg', 2, 154, 19, 0, 0, 1, 0, 0),
 (10, 'Hotel The Visage', 0, 54064, '/BD-T2/IMG/image10.jpg', 3, 111, 57, 1, 1, 0, 0, 1),
-(11, 'Sofitel Bahrain Zallaq Thalassa sea & spa', 9, 90000, '/BD-T2/IMG/image11.jpg', 5, 1000, 340, 1, 1, 1, 1, 1),
+(11, 'Sofitel Bahrain Zallaq Thalassa sea & spa', 9, 90000, '/BD-T2/IMG/image11.jpg', 5, 1000, 35, 1, 1, 1, 1, 1),
 (12, 'Kenana Hotel', 10, 39739, '/BD-T2/IMG/image12.jpg', 3, 500, 40, 1, 0, 0, 0, 1),
 (13, 'Batman\'s Hill On Collins', 11, 64616, '/BD-T2/IMG/image13.jpg', 4, 200, 15, 1, 0, 1, 1, 1),
-(14, 'Grand Hyatt Shanghai', 12, 105000, '/BD-T2/IMG/image14.jpg', 4, 700, 56, 1, 0, 1, 1, 1),
+(14, 'Grand Hyatt Shanghai', 12, 105000, '/BD-T2/IMG/image14.jpg', 4, 700, 37, 1, 0, 1, 1, 1),
 (15, 'Altus Hotel Baku', 13, 6588, '/BD-T2/IMG/image15.jpg', 3, 300, 16, 1, 0, 1, 1, 1),
 (16, 'Days Inn by Wyndham Miami Airport North', 14, 52816, '/BD-T2/IMG/image16.jpg', 2, 15, 7, 1, 0, 0, 0, 0);
 
@@ -178,9 +202,9 @@ CREATE TABLE `paquete` (
 
 INSERT INTO `paquete` (`id_paquete`, `nombre`, `img`, `aero_ida`, `aero_vuelta`, `id_hospedajes`, `id_ciudades`, `f_salida`, `f_llegada`, `noches_totales`, `precio_persona`, `paq_disp`, `paq_totales`, `max_personas`) VALUES
 (1, 'Tour San Andreas', '/BD-T2/IMG/imgpck1.jpg', 'LATAM', 'LATAM', 1, 1, '2023-05-30', '2023-06-06', 6, 100000, 15, 30, 3),
-(2, 'Vice City', '/BD-T2/IMG/imgpck2.jpg', 'LATAM', 'FlyUS', 2, 3, '2023-06-21', '2023-06-30', 8, 120000, 3, 5, 3),
-(3, 'F1 Races 1 - 3', '/BD-T2/IMG/imgpck3.jpg', 'LATAM', 'Emirates', 4, 4, '2023-06-01', '2023-06-18', 19, 3000000, 3, 4, 2),
-(4, 'F1 Races 4 - 6', '/BD-T2/IMG/imgpck4.jpg', 'LATAM', 'Emirates', 5, 5, '2023-07-01', '2023-07-23', 20, 2500000, 4, 6, 2);
+(2, 'Vice City', '/BD-T2/IMG/imgpck2.jpg', 'LATAM', 'FlyUS', 2, 3, '2023-06-21', '2023-06-30', 8, 120000, 40, 100, 3),
+(3, 'F1 Races 1 - 3', '/BD-T2/IMG/imgpck3.jpg', 'LATAM', 'Emirates', 4, 4, '2023-06-01', '2023-06-18', 19, 3000000, 50, 70, 2),
+(4, 'F1 Races 4 - 6', '/BD-T2/IMG/imgpck4.jpg', 'LATAM', 'Emirates', 5, 5, '2023-07-01', '2023-07-23', 20, 2500000, 44, 60, 2);
 
 -- --------------------------------------------------------
 
@@ -212,14 +236,41 @@ INSERT INTO `users` (`id`, `username`, `password`, `email`, `birthday`) VALUES
 
 CREATE TABLE `wishlist` (
   `id_wishlist` int(11) NOT NULL,
-  `id` int(11) DEFAULT NULL,
-  `id_paquete` int(11) DEFAULT NULL,
-  `id_hotel` int(11) DEFAULT NULL
+  `id_user` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `wish_item`
+--
+
+CREATE TABLE `wish_item` (
+  `id` int(11) NOT NULL,
+  `id_wishlist` int(11) NOT NULL,
+  `id_hotel` int(11) DEFAULT NULL,
+  `id_pack` int(11) DEFAULT NULL,
+  `ishotel` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `cart`
+--
+ALTER TABLE `cart`
+  ADD PRIMARY KEY (`cart_id`),
+  ADD KEY `FK_cart_iduser` (`id_user`);
+
+--
+-- Indexes for table `cart_item`
+--
+ALTER TABLE `cart_item`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FK_idhotel_cart` (`id_hotel`),
+  ADD KEY `FK_idpack_cart` (`id_pack`);
 
 --
 -- Indexes for table `ciudad`
@@ -267,8 +318,36 @@ ALTER TABLE `users`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `wishlist`
+--
+ALTER TABLE `wishlist`
+  ADD PRIMARY KEY (`id_wishlist`),
+  ADD KEY `FK_wishuser` (`id_user`);
+
+--
+-- Indexes for table `wish_item`
+--
+ALTER TABLE `wish_item`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FK_idhotel` (`id_hotel`),
+  ADD KEY `FK_idpack` (`id_pack`),
+  ADD KEY `FK_idwishlist` (`id_wishlist`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `cart`
+--
+ALTER TABLE `cart`
+  MODIFY `cart_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `cart_item`
+--
+ALTER TABLE `cart_item`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `grupo_ciudades`
@@ -301,8 +380,33 @@ ALTER TABLE `users`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
+-- AUTO_INCREMENT for table `wishlist`
+--
+ALTER TABLE `wishlist`
+  MODIFY `id_wishlist` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `wish_item`
+--
+ALTER TABLE `wish_item`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `cart`
+--
+ALTER TABLE `cart`
+  ADD CONSTRAINT `FK_cart_iduser` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`);
+
+--
+-- Constraints for table `cart_item`
+--
+ALTER TABLE `cart_item`
+  ADD CONSTRAINT `FK_idhotel_cart` FOREIGN KEY (`id_hotel`) REFERENCES `hotel` (`id_hotel`),
+  ADD CONSTRAINT `FK_idpack_cart` FOREIGN KEY (`id_pack`) REFERENCES `paquete` (`id_paquete`);
 
 --
 -- Constraints for table `grupo_ciudades`
@@ -332,6 +436,20 @@ ALTER TABLE `hotel`
 ALTER TABLE `paquete`
   ADD CONSTRAINT `FK_ciudades` FOREIGN KEY (`id_ciudades`) REFERENCES `grupo_ciudades` (`id_grupo`),
   ADD CONSTRAINT `FK_hospedajes` FOREIGN KEY (`id_hospedajes`) REFERENCES `grupo_hospedajes` (`id`);
+
+--
+-- Constraints for table `wishlist`
+--
+ALTER TABLE `wishlist`
+  ADD CONSTRAINT `FK_wishuser` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`);
+
+--
+-- Constraints for table `wish_item`
+--
+ALTER TABLE `wish_item`
+  ADD CONSTRAINT `FK_idhotel` FOREIGN KEY (`id_hotel`) REFERENCES `hotel` (`id_hotel`),
+  ADD CONSTRAINT `FK_idpack` FOREIGN KEY (`id_pack`) REFERENCES `paquete` (`id_paquete`),
+  ADD CONSTRAINT `FK_idwishlist` FOREIGN KEY (`id_wishlist`) REFERENCES `wishlist` (`id_wishlist`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

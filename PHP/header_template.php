@@ -22,27 +22,19 @@ if (!isset($_SESSION["isloggedin"]) || $_SESSION["isloggedin"] !== true) {
     <title>Prestige Travels</title>
 
     <link rel="stylesheet" href="../CSS/tempstyle.css">
-    <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Righteous">
-    <style>
-        body {
-            font-family: 'Righteous';
-            font-size: 48px;
-        }
-    </style> -->
 </head>
 
 
 <body>
 
     <div class="container">
-
         <ul>
             <li style="float:left"><a href="index.php">Home</a></li>
             <li><a href="myprofile.php">
                     <?php
                     // Se muestra el nombre del usuario 
                     if ($_SESSION["isloggedin"]) {
-                        echo "<b href='myprofile.php'>" . htmlspecialchars($_SESSION["username"]) . "</b>";
+                        echo "<b>" . htmlspecialchars($_SESSION["username"]) . "</b>";
                     }
                     ?>
                 </a></li>
