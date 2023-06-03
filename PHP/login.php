@@ -102,6 +102,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             background-color: #080710;
         }
 
+        .error {
+            color: tomato;
+
+        }
+
         form {
             height: 520px;
             width: 400px;
@@ -165,26 +170,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <body>
 
-    <?php
-    if (!empty($loginErr)) {
-        echo $loginErr;
-    }
-    ?>
+
 
     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
         <h3>Iniciar sesión</h3>
         <label for="username">Nombre de Usuario</label>
         <input type="text" name="username" id="username" placeholder="Nombre de Usuario"><br>
-        <span>
+        <span class="error">
             <?php echo $usrNameError ?>
         </span>
         <label for="password">Contraseña</label>
         <input type="password" name="password" id="password" placeholder="Contraseña"><br>
-        <span>
+        <span class="error">
             <?php echo $passError ?>
         </span>
         <input type="submit" value="Iniciar sesión">
-
+        <span class="error">
+            <?php echo $loginErr ?>
+        </span>
         <p>¿Aún no tienes una cuenta? <a href="signup.php">Regístrate!</a></p>
 
     </form>

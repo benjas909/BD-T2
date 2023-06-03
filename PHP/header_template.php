@@ -30,7 +30,8 @@ if (!isset($_SESSION["isloggedin"]) || $_SESSION["isloggedin"] !== true) {
     <div class="container">
         <ul>
             <li style="float:left"><a href="index.php">Home</a></li>
-            <li><a href="myprofile.php">
+            <!-- <li class="logo">PRESTIGE</li> -->
+            <li style="float:right"><a href="myprofile.php">
                     <?php
                     // Se muestra el nombre del usuario 
                     if ($_SESSION["isloggedin"]) {
@@ -38,5 +39,6 @@ if (!isset($_SESSION["isloggedin"]) || $_SESSION["isloggedin"] !== true) {
                     }
                     ?>
                 </a></li>
-            <li><a href="logout.php">Cerrar sesión</a></li>
+            <li style="float:right"><a href="logout.php">Cerrar sesión</a></li>
+            <li style="float:right"><a href="cart.php">Carrito</a></li>
         </ul>

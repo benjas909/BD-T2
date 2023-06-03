@@ -1,8 +1,8 @@
 <?php include_once 'header_template.php';
 ?>
+<br><br>
 <div class="flex-container">
     <?php
-    echo '<br><br>';
 
     $source = $_GET['source'];
     $nombre = $_GET['nombre'];
@@ -30,12 +30,12 @@
                 $desayuno = $row['desayuno'];
 
                 echo "<div class='image'>
-                    <img src='$imagen' alt='$nombre' id='img'>
+                    <img src='$imagen' alt='$nombre'>
                   </div>";
                 echo "<div class='info'>";
                 echo "<h3>$nombre</h3>";
                 echo "<p>Ciudad: $ciudad</p>";
-                echo "<p>Precio por noche: $precionoche</p>";
+                echo "<p>Precio por noche: $$precionoche</p>";
                 echo "<p>Estrellas: $estrellas</p>";
                 echo "<p>Habitaciones disponibles: $hab_disp/$hab_totales</p>";
                 echo "<p>Parking: " . ($parking ? 'Sí' : 'No') . "</p>";
@@ -81,7 +81,7 @@
                 echo "<p>Fecha de Salida: $f_salida</p>";
                 echo "<p>Fecha de Llegada: $f_llegada</p>";
                 echo "<p>Noches Totales: $noches_totales</p>";
-                echo "<p>Precio por Persona: $precio_persona</p>";
+                echo "<p>Precio por Persona: $$precio_persona</p>";
                 echo "<p>Disponibilidad: $paq_totales/$paq_disp</p>";
                 echo "<p>Máximo de Personas: $max_personas</p>";
                 echo "</div>";

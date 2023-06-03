@@ -14,7 +14,6 @@
 </div>
 
 
-
 <h3 class="titletext">Hoteles disponibles</h3>
 <?php
 
@@ -62,7 +61,7 @@ if ($result) {
 
     echo "Error executing the query: " . mysqli_error($conn);
 }
-// echo "</div>";
+
 ?>
 </div>
 

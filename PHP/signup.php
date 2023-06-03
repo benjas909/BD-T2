@@ -121,6 +121,19 @@
             mysqli_stmt_close($stmt);
         }
 
+        // Se obtiene la id asignada al nuevo usuario
+        $idquery = "SELECT id from users WHERE username='$username'";
+        $result = mysqli_query($conn, $idquery);
+        if ($result) {
+            $id = mysqli_fetch_assoc($result)['id'];
+            // echo "<script>alert('$id')</script>";
+        }
+
+        // Se crea su wishlist y su carrito
+        $wishquery = "INSERT INTO wishlist (id_user) VALUES ($id)";
+        $cartquery = "INSERT INTO cart (id_user) VALUES ($id)";
+        mysqli_query($conn, $wishquery);
+        mysqli_query($conn, $cartquery);
     }
 
 

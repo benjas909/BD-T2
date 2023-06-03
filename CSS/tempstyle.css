@@ -50,10 +50,19 @@
     overflow: hidden;
     background-color: rgba(62, 124, 177, 0.80);
     font-family: Righteous;
+    /* align-items: center; */
+    justify-content: center;
+
 }
 
 .container li {
-    float: right;
+    display: inline-block;
+    /* align-self:center; */
+}
+
+.container .logo {
+    align-self: center;
+    /* text-align: center; */
 }
 
 .container li a {
@@ -92,18 +101,21 @@
 .container .flex-container{
     display: flex;
     flex-direction: row;
+    align-items: flex-start;
+    gap: 4em;
+    
 }
 
 .container .flex-container .image img{
-    max-width: 30%;
-    max-height: auto;
-    align-self: flex-start;
+    max-width: auto;
+    max-height: 200px;
+    /* align-self: flex-start; */
 
 }
 
-.container .flex-container .info{
+/* .container .flex-container .info{
     align-self: flex-start;
-}
+} */
 
 /* .titletext {
 
