@@ -5,7 +5,7 @@ $itemid = $_GET['itemid'];
 $ishotel = $_GET['ishotel'];
 $prev_url = $_SERVER['HTTP_REFERER'];
 
-echo $id . " is hotel " . $ishotel;
+// echo $id . " is hotel " . $ishotel;
 
 if ($ishotel) {
     $selquery = mysqli_query($conn, "SELECT * FROM wishlist WHERE id_hotel=$itemid AND id_user=$userid");
