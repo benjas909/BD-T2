@@ -12,7 +12,7 @@
     if ($result) {
         while ($row = mysqli_fetch_assoc($result)) {
             echo "<div class='card'>";
-            $id = $row['id'];
+            // $id = $row['id'];
             $quant = $row['quant'];
             if ($row['ishotel']) {
                 $hotelid = $row['id_hotel'];

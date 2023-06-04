@@ -121,6 +121,7 @@
     gap: 4em;
 }
 
+
 .cart-container .totalprice {
     align-self: flex-end;
 }
@@ -138,9 +139,28 @@
 
 }
 
-
 .cart-container .card .price h2 {
     align-self: flex-end;
+}
+
+.wish-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    /* justify-content: space-between; */
+    gap: 4em;
+}
+
+.wish-container .card {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 4em;
+}
+
+.wish-container .card .image img {
+    max-height: auto;
+    max-width: 400px;
 }
 
 /* .container .flex-container .info{
