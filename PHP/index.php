@@ -14,7 +14,7 @@
 </div>
 
 
-<h3 class="titletext">Hoteles disponibles</h3>
+<h3 class="titletext">Top Reservas disponibles</h3>
 <?php
 
 $query = "

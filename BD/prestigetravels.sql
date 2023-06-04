@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 04, 2023 at 08:12 AM
+-- Generation Time: Jun 04, 2023 at 07:57 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -32,8 +32,17 @@ CREATE TABLE `cart` (
   `id_user` int(11) NOT NULL,
   `id_hotel` int(11) DEFAULT NULL,
   `id_pack` int(11) DEFAULT NULL,
-  `ishotel` tinyint(1) NOT NULL
+  `ishotel` tinyint(1) NOT NULL,
+  `quant` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `cart`
+--
+
+INSERT INTO `cart` (`id`, `id_user`, `id_hotel`, `id_pack`, `ishotel`, `quant`) VALUES
+(1, 5, 2, NULL, 1, 2),
+(2, 5, NULL, 3, 0, 1);
 
 -- --------------------------------------------------------
 
@@ -235,6 +244,13 @@ CREATE TABLE `wishlist` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
+-- Dumping data for table `wishlist`
+--
+
+INSERT INTO `wishlist` (`id`, `id_user`, `id_hotel`, `id_pack`, `ishotel`) VALUES
+(8, 5, NULL, 4, 0);
+
+--
 -- Indexes for dumped tables
 --
 
@@ -309,7 +325,7 @@ ALTER TABLE `wishlist`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `grupo_ciudades`
@@ -345,7 +361,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `wishlist`
 --
 ALTER TABLE `wishlist`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- Constraints for dumped tables
@@ -363,17 +379,17 @@ ALTER TABLE `cart`
 -- Constraints for table `grupo_ciudades`
 --
 ALTER TABLE `grupo_ciudades`
-  ADD CONSTRAINT `FK_ciudad1` FOREIGN KEY (`id_ciudad1`) REFERENCES `ciudad` (`id`),
-  ADD CONSTRAINT `FK_ciudad2` FOREIGN KEY (`id_ciudad2`) REFERENCES `ciudad` (`id`),
-  ADD CONSTRAINT `FK_ciudad3` FOREIGN KEY (`id_ciudad3`) REFERENCES `ciudad` (`id`);
+  ADD CONSTRAINT `FK_ciudad1` FOREIGN KEY (`id_ciudad1`) REFERENCES `ciudad` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_ciudad2` FOREIGN KEY (`id_ciudad2`) REFERENCES `ciudad` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_ciudad3` FOREIGN KEY (`id_ciudad3`) REFERENCES `ciudad` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `grupo_hospedajes`
 --
 ALTER TABLE `grupo_hospedajes`
-  ADD CONSTRAINT `FK_hotel1` FOREIGN KEY (`id_hotel1`) REFERENCES `hotel` (`id_hotel`),
-  ADD CONSTRAINT `FK_hotel2` FOREIGN KEY (`id_hotel2`) REFERENCES `hotel` (`id_hotel`),
-  ADD CONSTRAINT `FK_hotel3` FOREIGN KEY (`id_hotel3`) REFERENCES `hotel` (`id_hotel`);
+  ADD CONSTRAINT `FK_hotel1` FOREIGN KEY (`id_hotel1`) REFERENCES `hotel` (`id_hotel`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_hotel2` FOREIGN KEY (`id_hotel2`) REFERENCES `hotel` (`id_hotel`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_hotel3` FOREIGN KEY (`id_hotel3`) REFERENCES `hotel` (`id_hotel`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `hotel`
@@ -386,7 +402,7 @@ ALTER TABLE `hotel`
 --
 ALTER TABLE `paquete`
   ADD CONSTRAINT `FK_ciudades` FOREIGN KEY (`id_ciudades`) REFERENCES `grupo_ciudades` (`id_grupo`),
-  ADD CONSTRAINT `FK_hospedajes` FOREIGN KEY (`id_hospedajes`) REFERENCES `grupo_hospedajes` (`id`);
+  ADD CONSTRAINT `FK_hospedajes` FOREIGN KEY (`id_hospedajes`) REFERENCES `grupo_hospedajes` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `wishlist`
