@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 03, 2023 at 01:56 AM
+-- Generation Time: Jun 04, 2023 at 08:12 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -28,18 +28,8 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `cart` (
-  `cart_id` int(11) NOT NULL,
-  `id_user` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `cart_item`
---
-
-CREATE TABLE `cart_item` (
   `id` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL,
   `id_hotel` int(11) DEFAULT NULL,
   `id_pack` int(11) DEFAULT NULL,
   `ishotel` tinyint(1) NOT NULL
@@ -226,7 +216,9 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `username`, `password`, `email`, `birthday`) VALUES
 (4, 'benjamin', '$2y$10$/4p7Mvn.I9mTTCH/IAEdlOK9Qa8NkoaaK5bWQOAlNrs9Thx/w/Ela', 'benjamin.aguilera64@gmail.com', '2001-08-27'),
-(5, 'hasbulla', '$2y$10$5vYjqepQyXdnc.geXJ8zteZwo9bPFuTC7jWxUUh5WeRrKSnaMPhoO', 'hasbulla.delbulla@gmail.com', '2010-04-08');
+(5, 'hasbulla', '$2y$10$5vYjqepQyXdnc.geXJ8zteZwo9bPFuTC7jWxUUh5WeRrKSnaMPhoO', 'hasbulla.delbulla@gmail.com', '2010-04-08'),
+(11, 'banjos', '$2y$10$aBiQcHDaCqGZTvV9qc5iTeaPVm2CxlXZgq6s8J9HAm04JuF9EQEei', 'banjos@gmail.com', '2023-06-07'),
+(13, 'carlita', '$2y$10$OewyQBPG3/DNL8J1gy30g.yI38yLYZ5u2V25XC/mu/WUz7.NHvqJ6', 'holacarlita@gmail.com', '2023-06-01');
 
 -- --------------------------------------------------------
 
@@ -235,19 +227,8 @@ INSERT INTO `users` (`id`, `username`, `password`, `email`, `birthday`) VALUES
 --
 
 CREATE TABLE `wishlist` (
-  `id_wishlist` int(11) NOT NULL,
-  `id_user` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `wish_item`
---
-
-CREATE TABLE `wish_item` (
   `id` int(11) NOT NULL,
-  `id_wishlist` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL,
   `id_hotel` int(11) DEFAULT NULL,
   `id_pack` int(11) DEFAULT NULL,
   `ishotel` tinyint(1) NOT NULL
@@ -261,16 +242,10 @@ CREATE TABLE `wish_item` (
 -- Indexes for table `cart`
 --
 ALTER TABLE `cart`
-  ADD PRIMARY KEY (`cart_id`),
-  ADD KEY `FK_cart_iduser` (`id_user`);
-
---
--- Indexes for table `cart_item`
---
-ALTER TABLE `cart_item`
   ADD PRIMARY KEY (`id`),
   ADD KEY `FK_idhotel_cart` (`id_hotel`),
-  ADD KEY `FK_idpack_cart` (`id_pack`);
+  ADD KEY `FK_idpack_cart` (`id_pack`),
+  ADD KEY `FK_iduserc` (`id_user`);
 
 --
 -- Indexes for table `ciudad`
@@ -321,17 +296,10 @@ ALTER TABLE `users`
 -- Indexes for table `wishlist`
 --
 ALTER TABLE `wishlist`
-  ADD PRIMARY KEY (`id_wishlist`),
-  ADD KEY `FK_wishuser` (`id_user`);
-
---
--- Indexes for table `wish_item`
---
-ALTER TABLE `wish_item`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `FK_idhotel` (`id_hotel`),
-  ADD KEY `FK_idpack` (`id_pack`),
-  ADD KEY `FK_idwishlist` (`id_wishlist`);
+  ADD KEY `FK_wishuser` (`id_user`),
+  ADD KEY `FK_idhotelw` (`id_hotel`),
+  ADD KEY `FK_idpackw` (`id_pack`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -341,12 +309,6 @@ ALTER TABLE `wish_item`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `cart_id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `cart_item`
---
-ALTER TABLE `cart_item`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
@@ -377,19 +339,13 @@ ALTER TABLE `paquete`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `wishlist`
 --
 ALTER TABLE `wishlist`
-  MODIFY `id_wishlist` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `wish_item`
---
-ALTER TABLE `wish_item`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- Constraints for dumped tables
@@ -399,14 +355,9 @@ ALTER TABLE `wish_item`
 -- Constraints for table `cart`
 --
 ALTER TABLE `cart`
-  ADD CONSTRAINT `FK_cart_iduser` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`);
-
---
--- Constraints for table `cart_item`
---
-ALTER TABLE `cart_item`
-  ADD CONSTRAINT `FK_idhotel_cart` FOREIGN KEY (`id_hotel`) REFERENCES `hotel` (`id_hotel`),
-  ADD CONSTRAINT `FK_idpack_cart` FOREIGN KEY (`id_pack`) REFERENCES `paquete` (`id_paquete`);
+  ADD CONSTRAINT `FK_idhotel_cart` FOREIGN KEY (`id_hotel`) REFERENCES `hotel` (`id_hotel`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_idpack_cart` FOREIGN KEY (`id_pack`) REFERENCES `paquete` (`id_paquete`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_iduserc` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `grupo_ciudades`
@@ -441,15 +392,9 @@ ALTER TABLE `paquete`
 -- Constraints for table `wishlist`
 --
 ALTER TABLE `wishlist`
-  ADD CONSTRAINT `FK_wishuser` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`);
-
---
--- Constraints for table `wish_item`
---
-ALTER TABLE `wish_item`
-  ADD CONSTRAINT `FK_idhotel` FOREIGN KEY (`id_hotel`) REFERENCES `hotel` (`id_hotel`),
-  ADD CONSTRAINT `FK_idpack` FOREIGN KEY (`id_pack`) REFERENCES `paquete` (`id_paquete`),
-  ADD CONSTRAINT `FK_idwishlist` FOREIGN KEY (`id_wishlist`) REFERENCES `wishlist` (`id_wishlist`);
+  ADD CONSTRAINT `FK_idhotelw` FOREIGN KEY (`id_hotel`) REFERENCES `hotel` (`id_hotel`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_idpackw` FOREIGN KEY (`id_pack`) REFERENCES `paquete` (`id_paquete`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_wishuser` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
