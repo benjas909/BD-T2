@@ -5,13 +5,13 @@
     <?php
 
     $source = $_GET['source'];
-    $nombre = $_GET['nombre'];
+    $id = $_GET['id'];
 
 
     // echo "<div class='flex-container'>";
     if ($source === 'hotel') {
         $query = "
-    SELECT nombre, ciudad, img, precionoche, estrellas, hab_totales, hab_disp, parking, piscina, lavanderia, mascotas, desayuno FROM hotel WHERE nombre='$nombre'
+    SELECT nombre, ciudad, img, precionoche, estrellas, hab_totales, hab_disp, parking, piscina, lavanderia, mascotas, desayuno FROM hotel WHERE id_hotel='$id'
     ";
         $result = mysqli_query($conn, $query);
         if ($result) {
@@ -28,6 +28,7 @@
                 $lavanderia = $row['lavanderia'];
                 $mascotas = $row['mascotas'];
                 $desayuno = $row['desayuno'];
+                $ishotel = 1;
 
                 echo "<div class='image'>
                     <img src='$imagen' alt='$nombre'>
@@ -44,6 +45,10 @@
                 echo "<p>Mascotas: " . ($mascotas ? 'Sí' : 'No') . "</p>";
                 echo "<p>Desayuno: " . ($desayuno ? 'Sí' : 'No') . "</p>";
                 echo "</div>";
+                // echo "<div>";
+                // echo "<a href='add_wishlist.php?itemid=$id&ishotel=$ishotel'>Agregar a wishlist</a>";
+                // echo "<a href=''>Agregar al carrito</a>";
+    
             }
 
         } else {
@@ -52,7 +57,7 @@
 
     } elseif ($source === 'paquete') {
         $query = "
-    SELECT nombre, img, aero_ida, aero_vuelta, f_salida, f_llegada, noches_totales, precio_persona, paq_disp, paq_totales, max_personas , id_hospedajes, id_ciudades FROM paquete WHERE nombre='$nombre'
+    SELECT nombre, img, aero_ida, aero_vuelta, f_salida, f_llegada, noches_totales, precio_persona, paq_disp, paq_totales, max_personas , id_hospedajes, id_ciudades FROM paquete WHERE id_paquete='$id'
     ";
         $result = mysqli_query($conn, $query);
         if ($result) {
@@ -70,6 +75,7 @@
                 $max_personas = $row['max_personas'];
                 $id_hospedajes = $row['id_hospedajes'];
                 $id_ciudades = $row['id_ciudades'];
+                $ishotel = 0;
 
                 echo "<div class='image'>
                     <img src='$imagen' alt='$nombre'>
@@ -85,11 +91,15 @@
                 echo "<p>Disponibilidad: $paq_totales/$paq_disp</p>";
                 echo "<p>Máximo de Personas: $max_personas</p>";
                 echo "</div>";
+
             }
         } else {
             echo "Error executing the query: " . mysqli_error($conn);
         }
     }
+    echo "<div class='addto'>";
+    echo "<a href='add_wishlist.php?itemid=$id&ishotel=$ishotel'>Agregar/Quitar de wishlist</a><br>";
+    echo "<a href='add_cart.php?itemid=$id&ishotel=$ishotel'>Agregar al carrito</a>";
     echo "</div>";
     ?>
 </div>

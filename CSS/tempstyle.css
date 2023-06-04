@@ -51,18 +51,11 @@
     background-color: rgba(62, 124, 177, 0.80);
     font-family: Righteous;
     /* align-items: center; */
-    justify-content: center;
 
 }
 
 .container li {
-    display: inline-block;
-    /* align-self:center; */
-}
-
-.container .logo {
-    align-self: center;
-    /* text-align: center; */
+    float: right;
 }
 
 .container li a {

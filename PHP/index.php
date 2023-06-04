@@ -18,12 +18,12 @@
 <?php
 
 $query = "
-    SELECT combinacion.nombre, combinacion.img, combinacion.precio, combinacion.source, combinacion.disponibilidad
+    SELECT combinacion.id, combinacion.nombre, combinacion.img, combinacion.precio, combinacion.source, combinacion.disponibilidad
     FROM (
-        SELECT nombre, img, precionoche AS precio , 'hotel' AS source, hab_disp AS disponibilidad
+        SELECT id_hotel AS id, nombre, img, precionoche AS precio , 'hotel' AS source, hab_disp AS disponibilidad
         FROM hotel
         UNION ALL
-        SELECT nombre, img, precio_persona AS precio , 'paquete' AS source, paq_disp AS disponibilidad
+        SELECT id_paquete AS id, nombre, img, precio_persona AS precio , 'paquete' AS source, paq_disp AS disponibilidad
         FROM paquete
     ) AS combinacion
     ORDER BY combinacion.disponibilidad DESC
@@ -35,11 +35,12 @@ $result = mysqli_query($conn, $query);
 if ($result) {
     while ($row = mysqli_fetch_assoc($result)) {
 
+        $id = $row['id'];
         $nombre = $row['nombre'];
         $precio = $row['precio'];
         $imagen = $row['img'];
         $source = $row['source'];
-        $url = "info.php?source=" . urlencode($source) . "&nombre=" . urlencode($nombre);
+        $url = "info.php?source=" . urlencode($source) . "&id=" . urlencode($id);
 
         echo "<a class='hyperlink' href='$url'>";
         echo "<div class= 'card'>";
@@ -52,7 +53,7 @@ if ($result) {
             echo "Precio/persona: $$precio <br>";
         }
 
-        echo "Imagen: <img src='$imagen' alt='Hotel Image' class='item-img'><br><br>";
+        echo "Imagen: <img src='$imagen' alt='Item Image' class='item-img'><br><br>";
 
         echo "</div>";
         echo "</a>";
