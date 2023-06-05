@@ -7,16 +7,13 @@ $prev_url = $_SERVER['HTTP_REFERER'];
 
 if ($ishotel) {
     $selquery = mysqli_query($conn, "SELECT * FROM cart WHERE id_hotel=$itemid AND id_user=$userid");
+    $row = mysqli_fetch_assoc($selquery);
+    if ($row['quant'] > 1) {
 
-    if (mysqli_num_rows($selquery)) {
-
-        if ($stmt = mysqli_prepare($conn, "UPDATE cart SET quant = quant + 1 WHERE id_hotel=$itemid AND id_user=$userid")) {
+        if ($stmt = mysqli_prepare($conn, "UPDATE cart SET quant = quant - 1 WHERE id_hotel=$itemid AND id_user=$userid")) {
 
             if (mysqli_stmt_execute($stmt)) {
-                echo "<script> alert('Se ha añadido el hotel al carrito');
-                               window.location = '$prev_url'
-                      </script>";
-                // header("location:$prev_url");
+                header("location:$prev_url");
                 exit();
             } else {
                 echo "Error inesperado al agregar elemento al carrito (Ejecución de query)";
@@ -24,24 +21,22 @@ if ($ishotel) {
             }
         }
     } else {
-        if ($stmt = mysqli_prepare($conn, "INSERT INTO cart (id_user, id_hotel, ishotel, quant) VALUES ($userid, $itemid, $ishotel, 1)")) {
+        if ($stmt = mysqli_prepare($conn, "DELETE FROM cart WHERE id_hotel=$itemid")) {
             if (mysqli_stmt_execute($stmt)) {
-                echo "<script> alert('Se ha añadido el hotel a al carrito');
-                               window.location = '$prev_url';
-                      </script>";
-                // header("location:$prev_url");
+                header("location:$prev_url");
                 exit();
             }
         }
     }
 } else {
     $selquery = mysqli_query($conn, "SELECT * FROM cart WHERE id_pack=$itemid AND id_user=$userid");
+    $row = mysqli_fetch_assoc($selquery);
+    if ($row['quant'] > 1) {
 
-    if (mysqli_num_rows($selquery)) {
-
-        if ($stmt = mysqli_prepare($conn, "UPDATE cart SET quant = quant + 1 WHERE id_pack=$itemid AND id_user=$userid")) {
+        if ($stmt = mysqli_prepare($conn, "UPDATE cart SET quant = quant - 1 WHERE id_pack=$itemid AND id_user=$userid")) {
 
             if (mysqli_stmt_execute($stmt)) {
+                
                 header("location:$prev_url");
                 exit();
             } else {
@@ -50,14 +45,12 @@ if ($ishotel) {
             }
         }
     } else {
-        if ($stmt = mysqli_prepare($conn, "INSERT INTO cart (id_user, id_pack, ishotel, quant) VALUES ($userid, $itemid, $ishotel, 1)")) {
+        if ($stmt = mysqli_prepare($conn, "DELETE FROM cart WHERE id_pack=$itemid")) {
             if (mysqli_stmt_execute($stmt)) {
+                
                 header("location:$prev_url");
                 exit();
             }
         }
     }
 }
-// mysqli_close($conn);
-
-?>

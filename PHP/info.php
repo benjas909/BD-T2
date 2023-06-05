@@ -16,9 +16,16 @@
         $result = mysqli_query($conn, $query);
         if ($result) {
             while ($row = mysqli_fetch_assoc($result)) {
+                $idciudad = $row['ciudad'];
+                $cityquery = "SELECT nombre FROM ciudad WHERE id=$idciudad";
+                $cityresult = mysqli_query($conn, $cityquery);
+                if ($cityresult){
+                    $cityrow = mysqli_fetch_assoc($cityresult); 
+                }
+
                 $nombre = $row['nombre'];
+                $ciudad = $cityrow['nombre'];
                 $imagen = $row['img'];
-                $ciudad = $row['ciudad'];
                 $precionoche = $row['precionoche'];
                 $estrellas = $row['estrellas'];
                 $hab_totales = $row['hab_totales'];
@@ -57,7 +64,7 @@
 
     } elseif ($source === 'paquete') {
         $query = "
-    SELECT nombre, img, aero_ida, aero_vuelta, f_salida, f_llegada, noches_totales, precio_persona, paq_disp, paq_totales, max_personas , id_hospedajes, id_ciudades FROM paquete WHERE id_paquete='$id'
+    SELECT nombre, img, aero_ida, aero_vuelta, f_salida, f_llegada, DATEDIFF(f_llegada, f_salida) AS noches_totales, precio_persona, paq_disp, paq_totales, max_personas , id_hospedajes, id_ciudades FROM paquete WHERE id_paquete='$id'
     ";
         $result = mysqli_query($conn, $query);
         if ($result) {

@@ -12,9 +12,10 @@
     if ($result) {
         while ($row = mysqli_fetch_assoc($result)) {
             echo "<div class='card'>";
+            $ishotel = $row['ishotel'];
             // $id = $row['id'];
             $quant = $row['quant'];
-            if ($row['ishotel']) {
+            if ($ishotel) {
                 $hotelid = $row['id_hotel'];
                 // echo $hotelid;
                 $hquery = "SELECT nombre, precionoche, img FROM hotel WHERE id_hotel=$hotelid";
@@ -36,10 +37,13 @@
                         echo "<div class='price'>";
                         echo "<h2>$$hprice <h5>/noche</h5></h2>";
                         echo "</div>";
+                        echo "<div class='remove'>
+                                    <a href='remove_cart.php?itemid=$hotelid&ishotel=$ishotel'>Eliminar de Wishlist</a>
+                                  </div>";
                         $totalprice = $totalprice + ($quant * $hprice);
                     }
                 }
-            } elseif (!$row['ishotel']) {
+            } elseif (!$ishotel) {
                 $packid = $row['id_pack'];
                 $pquery = "SELECT nombre, precio_persona, img FROM paquete WHERE id_paquete=$packid";
                 $presult = mysqli_query($conn, $pquery);
@@ -60,6 +64,9 @@
                         echo "<div class='price'>";
                         echo "<h2>$$price<h5>/persona</h5></h2>";
                         echo "</div>";
+                        echo "<div class='remove'>
+                                    <a href='remove_cart.php?itemid=$packid&ishotel=$ishotel'>Eliminar de Wishlist</a>
+                                  </div>";
                         $totalprice = $totalprice + ($quant * $price);
                     }
                 }
