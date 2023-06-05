@@ -66,7 +66,7 @@
             }
             echo "</div>";
         }
-        echo "<h1 class='totalprice'>Precio total: $totalprice</h1>";
+        echo "<h1 class='totalprice'>Precio total: $$totalprice</h1>";
     } else {
         echo "<h1>Tu carrito está vacío</h1>";
     }

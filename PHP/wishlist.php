@@ -9,8 +9,9 @@
         if($result) {
             while ($row = mysqli_fetch_assoc($result)) {
                 echo "<div class='card'>";
+                $ishotel = $row['ishotel'];
                 
-                if($row['ishotel']){
+                if($ishotel){
                     $idhotel = $row['id_hotel'];
                     $hquery = "SELECT nombre, img FROM hotel WHERE id_hotel=$idhotel";
                     $hresult = mysqli_query($conn, $hquery);
@@ -21,16 +22,21 @@
                             $himg = $hrow['img'];
 
                             echo "<div class='image'>
-                                <img src='$himg' alt='$hname'>
-                              </div>";
+                                    <img src='$himg' alt='$hname'>
+                                  </div>";
                             echo "<div class='info'>";
+                            echo "<a href='info.php?source=hotel&id=$idhotel'>";
                             echo "<h2>$hname</h2>";
-                            // echo "<h3>Cantidad: $quant</h3>";
+                            echo "</a>";
                             echo "</div>";
+                            echo "<div class='remove'>
+                                    <a href='add_wishlist.php?itemid=$idhotel&ishotel=$ishotel'>Eliminar de Wishlist</a>
+                                  </div>";
 
                         }
                     }
-                } elseif (!$row['ishotel']) {
+                } elseif (!$ishotel) {
+                    
                     $packid = $row['id_pack'];
                     $pquery = "SELECT nombre, img FROM paquete WHERE id_paquete=$packid";
                     $presult = mysqli_query($conn, $pquery);
@@ -44,16 +50,23 @@
                                     <img src='$pimg' alt='$pname'>
                                 </div>";
                             echo "<div class='info'>";
+                            echo "<a href='info.php?source=paquete&id=$packid'>";
                             echo "<h2>$pname</h2>";
+                            echo "</a>";
                             echo "</div>";
+                            echo "<div class='remove'>
+                                    <a href='add_wishlist.php?itemid=$packid&ishotel=$ishotel'>Eliminar de Wishlist</a>
+                                  </div>";
                         }
                     }
                 }
                 echo "</div>";
             }
-        } else {
-            echo "<h1>No has agregado elementos a tu wishlist.</h1>";
-        }
+            // if (!$row) {
+            //     echo "<h1>No has agregado elementos a tu wishlist.</h1>";
+
+            // }
+        } 
     ?>
 
 </div>

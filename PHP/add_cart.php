@@ -64,6 +64,6 @@ if ($ishotel) {
         }
     }
 }
-mysqli_close($conn);
+// mysqli_close($conn);
 
 ?>
