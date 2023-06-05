@@ -13,6 +13,22 @@
 
 </div>
 
+<h3> Busqueda: </h3>
+
+<form action="basicsearch.php" method="GET">
+        <label for="nombre">Nombre:</label>
+        <input type="text" name="nombre" id="nombre"><br><br>
+
+        <label for="ciudad">Ciudad:</label>
+        <input type="text" name="ciudad" id="ciudad"><br><br>
+
+        <label for="fechainicio">Fecha de inicio:</label>
+        <input type="text" name="fechainicio" id="fechainicio"><br><br>
+
+        <label for="fechatermino">Fecha de termino:</label>
+        <input type="text" name="fechatermino" id="fechatermino"><br><br>
+
+        <input type="submit" value="Buscar">
 
 <h3 class="titletext">Top Reservas disponibles</h3>
 <?php
@@ -31,7 +47,7 @@ $query = "
 ";
 
 $result = mysqli_query($conn, $query);
-// echo "<div>";
+
 if ($result) {
     while ($row = mysqli_fetch_assoc($result)) {
 
