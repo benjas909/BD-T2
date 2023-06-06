@@ -95,7 +95,7 @@
                 echo "<p>Fecha de Llegada: $f_llegada</p>";
                 echo "<p>Noches Totales: $noches_totales</p>";
                 echo "<p>Precio por Persona: $$precio_persona</p>";
-                echo "<p>Disponibilidad: $paq_totales/$paq_disp</p>";
+                echo "<p>Disponibilidad: $paq_disp/$paq_totales</p>";
                 echo "<p>Máximo de Personas: $max_personas</p>";
                 echo "</div>";
 

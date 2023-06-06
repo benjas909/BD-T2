@@ -40,7 +40,7 @@
                         echo "<h2>$$hprice <h5>/noche</h5></h2>";
                         echo "</div>";
                         echo "<div class='remove'>
-                                    <a href='remove_cart.php?itemid=$hotelid&ishotel=$ishotel'>Eliminar de Wishlist</a>
+                                    <a href='remove_cart.php?itemid=$hotelid&ishotel=$ishotel'>Eliminar del Carrito</a>
                                   </div>";
                         $totalprice = $totalprice + ($quant * $hprice);
                     }
@@ -67,7 +67,7 @@
                         echo "<h2>$$price<h5>/persona</h5></h2>";
                         echo "</div>";
                         echo "<div class='remove'>
-                                    <a href='remove_cart.php?itemid=$packid&ishotel=$ishotel'>Eliminar de Wishlist</a>
+                                    <a href='remove_cart.php?itemid=$packid&ishotel=$ishotel'>Eliminar del Carrito</a>
                                   </div>";
                         $totalprice = $totalprice + ($quant * $price);
                     }
