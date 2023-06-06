@@ -41,4 +41,5 @@ if (!isset($_SESSION["isloggedin"]) || $_SESSION["isloggedin"] !== true) {
                 </a></li>
             <li style="float:right"><a href="logout.php">Cerrar sesión</a></li>
             <li style="float:right"><a href="cart.php">Carrito</a></li>
+            <li style="float:right"><a href="advancedsearch.php">Busqueda Avanzada</a></li>
         </ul>
