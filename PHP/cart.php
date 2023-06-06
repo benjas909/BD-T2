@@ -3,7 +3,9 @@
 <br><br>
 <div class="cart-container">
     <?php
-    $query = "SELECT * FROM cart";
+    $userid = $_SESSION['id'];
+
+    $query = "SELECT * FROM cart WHERE id_user=$userid";
 
     $result = mysqli_query($conn, $query);
     $totalprice = 0;
@@ -74,6 +76,9 @@
             echo "</div>";
         }
         echo "<h1 class='totalprice'>Precio total: $$totalprice</h1>";
+        echo "<div class='comprar'>
+              <a href='purchase.php?id=$userid'><h3>Comprar</h3></a>
+              </div>";
     } else {
         echo "<h1>Tu carrito está vacío</h1>";
     }

@@ -3,7 +3,8 @@
 
 <div class="wish-container">
     <?php
-        $query = "SELECT * FROM wishlist";
+        $userid = $_SESSION['id'];
+        $query = "SELECT * FROM wishlist WHERE id_user=$userid";
         $result = mysqli_query($conn, $query);
 
         if($result) {
