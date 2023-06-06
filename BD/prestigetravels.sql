@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 06, 2023 at 12:49 AM
+-- Generation Time: Jun 06, 2023 at 08:13 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -44,14 +44,14 @@ CREATE TABLE `cart` (
 
 CREATE TABLE `ciudad` (
   `id` int(11) NOT NULL,
-  `nombre` varchar(50) DEFAULT NULL
+  `ciudad_nombre` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `ciudad`
 --
 
-INSERT INTO `ciudad` (`id`, `nombre`) VALUES
+INSERT INTO `ciudad` (`id`, `ciudad_nombre`) VALUES
 (0, 'Las Venturas'),
 (1, 'Los Santos'),
 (2, 'Vice City'),
@@ -127,6 +127,21 @@ INSERT INTO `grupo_hospedajes` (`id`, `id_hotel1`, `id_hotel2`, `id_hotel3`) VAL
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `historial`
+--
+
+CREATE TABLE `historial` (
+  `id` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL,
+  `id_hotel` int(11) DEFAULT NULL,
+  `id_pack` int(11) DEFAULT NULL,
+  `ishotel` tinyint(1) NOT NULL,
+  `quant` int(11) NOT NULL DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `hotel`
 --
 
@@ -152,7 +167,7 @@ CREATE TABLE `hotel` (
 
 INSERT INTO `hotel` (`id_hotel`, `nombre`, `ciudad`, `precionoche`, `img`, `estrellas`, `hab_totales`, `hab_disp`, `parking`, `piscina`, `lavanderia`, `mascotas`, `desayuno`) VALUES
 (1, 'Richman Hotel', 1, 37944, '/BD-T2/IMG/image1.jpg', 3, 53, 10, 1, 1, 1, 0, 0),
-(2, 'Hotel Jefferson', 1, 26991, '/BD-T2/IMG/image2.jpg', 4, 106, 76, 1, 1, 1, 1, 1),
+(2, 'Hotel Jefferson', 1, 26991, '/BD-T2/IMG/image2.jpg', 4, 106, 73, 1, 1, 1, 1, 1),
 (3, 'Templar Hotel', 1, 64118, '/BD-T2/IMG/image3.jpg', 4, 102, 12, 1, 0, 0, 1, 1),
 (4, 'Hotel Ocean View', 2, 46381, '/BD-T2/IMG/image4.jpg', 5, 150, 20, 1, 1, 1, 1, 1),
 (5, 'Hotel Moist Palms', 2, 61975, '/BD-T2/IMG/image5.jpg', 4, 154, 22, 1, 0, 1, 0, 0),
@@ -160,16 +175,50 @@ INSERT INTO `hotel` (`id_hotel`, `nombre`, `ciudad`, `precionoche`, `img`, `estr
 (7, 'Indian Inn Hotel', 8, 36571, '/BD-T2/IMG/image7.jpg', 2, 82, 2, 0, 0, 0, 0, 0),
 (8, 'Nicoise Hotel', 4, 91168, '/BD-T2/IMG/image8.jpg', 5, 118, 2, 1, 1, 1, 0, 1),
 (9, 'Old Bullworth Vale Hotel', 7, 48146, '/BD-T2/IMG/image9.jpg', 2, 154, 19, 0, 0, 1, 0, 0),
-(10, 'Hotel The Visage', 0, 54064, '/BD-T2/IMG/image10.jpg', 4, 111, 57, 1, 1, 0, 0, 1),
-(11, 'Sofitel Bahrain Zallaq Thalassa sea & spa', 9, 90000, '/BD-T2/IMG/image11.jpg', 5, 1000, 35, 1, 1, 1, 1, 1),
-(12, 'Kenana Hotel', 10, 39739, '/BD-T2/IMG/image12.jpg', 3, 500, 40, 1, 0, 0, 0, 1),
-(13, 'Batman\'s Hill On Collins', 11, 64616, '/BD-T2/IMG/image13.jpg', 5, 200, 15, 1, 0, 1, 1, 1),
+(10, 'Hotel The Visage', 0, 54064, '/BD-T2/IMG/image10.jpg', 4, 111, 56, 1, 1, 0, 0, 1),
+(11, 'Sofitel Bahrain Zallaq Thalassa sea & spa', 9, 90000, '/BD-T2/IMG/image11.jpg', 5, 1000, 33, 1, 1, 1, 1, 1),
+(12, 'Kenana Hotel', 10, 39739, '/BD-T2/IMG/image12.jpg', 3, 500, 38, 1, 0, 0, 0, 1),
+(13, 'Batman\'s Hill On Collins', 11, 64616, '/BD-T2/IMG/image13.jpg', 5, 200, 13, 1, 0, 1, 1, 1),
 (14, 'Grand Hyatt Shanghai', 12, 105000, '/BD-T2/IMG/image14.jpg', 5, 700, 37, 1, 0, 1, 1, 1),
 (15, 'Altus Hotel Baku', 13, 6588, '/BD-T2/IMG/image15.jpg', 4, 300, 16, 1, 0, 1, 1, 1),
 (16, 'Days Inn by Wyndham Miami Airport North', 14, 52816, '/BD-T2/IMG/image16.jpg', 3, 15, 7, 1, 0, 0, 0, 0),
 (17, 'Santiago Hotel', 15, 22500, '/BD-T2/IMG/image17.jpg', 3, 50, 5, 1, 0, 0, 0, 1),
 (18, 'Fairmont Monte Carlo', 16, 217000, '/BD-T2/IMG/image18.jpg', 4, 200, 20, 1, 1, 1, 1, 1),
 (19, 'Hotel Soho', 17, 83100, '/BD-T2/IMG/image19.jpg', 3, 150, 22, 1, 1, 1, 1, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `hotel_review`
+--
+
+CREATE TABLE `hotel_review` (
+  `id` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL,
+  `id_hotel` int(11) NOT NULL,
+  `limpieza` int(11) NOT NULL,
+  `servicio` int(11) NOT NULL,
+  `deco` int(11) NOT NULL,
+  `camas` int(11) NOT NULL,
+  `reseña` varchar(256) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `package_review`
+--
+
+CREATE TABLE `package_review` (
+  `id` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL,
+  `id_pack` int(11) NOT NULL,
+  `cal_hoteles` int(11) NOT NULL,
+  `cal_transport` int(11) NOT NULL,
+  `cal_servicio` int(11) NOT NULL,
+  `rel_calprecio` int(11) NOT NULL,
+  `reseña` varchar(256) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -200,7 +249,7 @@ CREATE TABLE `paquete` (
 INSERT INTO `paquete` (`id_paquete`, `nombre`, `img`, `aero_ida`, `aero_vuelta`, `id_hospedajes`, `id_ciudades`, `f_salida`, `f_llegada`, `precio_persona`, `paq_disp`, `paq_totales`, `max_personas`) VALUES
 (1, 'Tour San Andreas', '/BD-T2/IMG/imgpck1.jpg', 'LATAM', 'LATAM', 1, 1, '2023-05-30', '2023-06-06', 100000, 15, 30, 3),
 (2, 'Vice City', '/BD-T2/IMG/imgpck2.jpg', 'LATAM', 'FlyUS', 2, 3, '2023-06-21', '2023-06-30', 120000, 40, 100, 3),
-(3, 'F1 Races 1 - 3', '/BD-T2/IMG/imgpck3.jpg', 'LATAM', 'Emirates', 4, 4, '2023-06-01', '2023-06-18', 3000000, 50, 70, 2),
+(3, 'F1 Races 1 - 3', '/BD-T2/IMG/imgpck3.jpg', 'LATAM', 'Emirates', 4, 4, '2023-06-01', '2023-06-18', 3000000, 49, 70, 2),
 (4, 'F1 Races 4 - 6', '/BD-T2/IMG/imgpck4.jpg', 'LATAM', 'Emirates', 5, 5, '2023-07-01', '2023-07-23', 2500000, 44, 60, 2),
 (5, 'F1 Races 7 - 8', '/BD-T2/IMG/imgpck5.jpg', 'LATAM', 'Emirates', 6, 6, '2023-08-03', '2023-08-13', 1500000, 7, 10, 2),
 (7, 'F1 Spanish Grand Prix ', '/BD-T2/IMG/imgpck6.jpg', 'LATAM', 'IBERIA', 7, 7, '2023-08-17', '2023-08-20', 600000, 11, 20, 2);
@@ -288,11 +337,36 @@ ALTER TABLE `grupo_hospedajes`
   ADD KEY `FK_hotel3` (`id_hotel3`) USING BTREE;
 
 --
+-- Indexes for table `historial`
+--
+ALTER TABLE `historial`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FK_hist_user` (`id_user`),
+  ADD KEY `FK_hist_hotel` (`id_hotel`),
+  ADD KEY `FK_hist_pack` (`id_pack`);
+
+--
 -- Indexes for table `hotel`
 --
 ALTER TABLE `hotel`
   ADD PRIMARY KEY (`id_hotel`),
   ADD KEY `FK_ciudadhotel` (`ciudad`);
+
+--
+-- Indexes for table `hotel_review`
+--
+ALTER TABLE `hotel_review`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FK_hreview_user` (`id_user`),
+  ADD KEY `FK_hreview_hotel` (`id_hotel`);
+
+--
+-- Indexes for table `package_review`
+--
+ALTER TABLE `package_review`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FK_preview_user` (`id_user`),
+  ADD KEY `FK_preview_pack` (`id_pack`);
 
 --
 -- Indexes for table `paquete`
@@ -325,7 +399,7 @@ ALTER TABLE `wishlist`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `grupo_ciudades`
@@ -340,10 +414,28 @@ ALTER TABLE `grupo_hospedajes`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
+-- AUTO_INCREMENT for table `historial`
+--
+ALTER TABLE `historial`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `hotel`
 --
 ALTER TABLE `hotel`
   MODIFY `id_hotel` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+
+--
+-- AUTO_INCREMENT for table `hotel_review`
+--
+ALTER TABLE `hotel_review`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `package_review`
+--
+ALTER TABLE `package_review`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `paquete`
@@ -392,10 +484,32 @@ ALTER TABLE `grupo_hospedajes`
   ADD CONSTRAINT `FK_hotel3` FOREIGN KEY (`id_hotel3`) REFERENCES `hotel` (`id_hotel`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
+-- Constraints for table `historial`
+--
+ALTER TABLE `historial`
+  ADD CONSTRAINT `FK_hist_hotel` FOREIGN KEY (`id_hotel`) REFERENCES `hotel` (`id_hotel`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_hist_pack` FOREIGN KEY (`id_pack`) REFERENCES `paquete` (`id_paquete`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_hist_user` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
 -- Constraints for table `hotel`
 --
 ALTER TABLE `hotel`
   ADD CONSTRAINT `FK_ciudadhotel` FOREIGN KEY (`ciudad`) REFERENCES `ciudad` (`id`);
+
+--
+-- Constraints for table `hotel_review`
+--
+ALTER TABLE `hotel_review`
+  ADD CONSTRAINT `FK_hreview_hotel` FOREIGN KEY (`id_hotel`) REFERENCES `hotel` (`id_hotel`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_hreview_user` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `package_review`
+--
+ALTER TABLE `package_review`
+  ADD CONSTRAINT `FK_preview_pack` FOREIGN KEY (`id_pack`) REFERENCES `paquete` (`id_paquete`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_preview_user` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `paquete`
