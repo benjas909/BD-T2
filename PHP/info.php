@@ -17,7 +17,7 @@
         if ($result) {
             while ($row = mysqli_fetch_assoc($result)) {
                 $idciudad = $row['ciudad'];
-                $cityquery = "SELECT nombre FROM ciudad WHERE id=$idciudad";
+                $cityquery = "SELECT ciudad_nombre AS nombre FROM ciudad WHERE id=$idciudad";
                 $cityresult = mysqli_query($conn, $cityquery);
                 if ($cityresult){
                     $cityrow = mysqli_fetch_assoc($cityresult); 

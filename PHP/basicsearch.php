@@ -1,17 +1,6 @@
-<?php require 'config/database.php';
-session_start();
+<?php include 'header_template.php';
+// session_start();
 
-// Si la persona no ha iniciado sesión, se le redirecciona al login
-if (!isset($_SESSION["isloggedin"]) || $_SESSION["isloggedin"] !== true) {
-    // echo '<script>
-    //         alert("No has iniciado sesión.");
-    //         window.location = "login.php";
-    //         </script>';
-    header("location: login.php");
-    session_destroy();
-    // die();
-    exit;
-}
 
 $nombre=$_GET['nombre'];
 $ciudad=$_GET['ciudad'];
@@ -83,3 +72,5 @@ if (!empty($nombre) || !empty($ciudad) || !empty($fechainicio) || !empty($fechat
 
 
 ?>
+
+<?php include 'footer_template.php';
