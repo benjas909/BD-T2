@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 06, 2023 at 08:13 PM
+-- Generation Time: Jun 07, 2023 at 01:41 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -33,7 +33,7 @@ CREATE TABLE `cart` (
   `id_hotel` int(11) DEFAULT NULL,
   `id_pack` int(11) DEFAULT NULL,
   `ishotel` tinyint(1) NOT NULL,
-  `quant` int(11) NOT NULL
+  `quant` int(11) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -139,6 +139,15 @@ CREATE TABLE `historial` (
   `quant` int(11) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `historial`
+--
+
+INSERT INTO `historial` (`id`, `id_user`, `id_hotel`, `id_pack`, `ishotel`, `quant`) VALUES
+(13, 5, 10, NULL, 1, 1),
+(14, 5, 4, NULL, 1, 1),
+(15, 5, NULL, 4, 0, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -169,19 +178,19 @@ INSERT INTO `hotel` (`id_hotel`, `nombre`, `ciudad`, `precionoche`, `img`, `estr
 (1, 'Richman Hotel', 1, 37944, '/BD-T2/IMG/image1.jpg', 3, 53, 10, 1, 1, 1, 0, 0),
 (2, 'Hotel Jefferson', 1, 26991, '/BD-T2/IMG/image2.jpg', 4, 106, 73, 1, 1, 1, 1, 1),
 (3, 'Templar Hotel', 1, 64118, '/BD-T2/IMG/image3.jpg', 4, 102, 12, 1, 0, 0, 1, 1),
-(4, 'Hotel Ocean View', 2, 46381, '/BD-T2/IMG/image4.jpg', 5, 150, 20, 1, 1, 1, 1, 1),
+(4, 'Hotel Ocean View', 2, 46381, '/BD-T2/IMG/image4.jpg', 5, 150, 19, 1, 1, 1, 1, 1),
 (5, 'Hotel Moist Palms', 2, 61975, '/BD-T2/IMG/image5.jpg', 4, 154, 22, 1, 0, 1, 0, 0),
 (6, 'Majestic Hotel', 4, 52217, '/BD-T2/IMG/image6.jpg', 4, 92, 14, 1, 0, 0, 1, 1),
 (7, 'Indian Inn Hotel', 8, 36571, '/BD-T2/IMG/image7.jpg', 2, 82, 2, 0, 0, 0, 0, 0),
 (8, 'Nicoise Hotel', 4, 91168, '/BD-T2/IMG/image8.jpg', 5, 118, 2, 1, 1, 1, 0, 1),
 (9, 'Old Bullworth Vale Hotel', 7, 48146, '/BD-T2/IMG/image9.jpg', 2, 154, 19, 0, 0, 1, 0, 0),
-(10, 'Hotel The Visage', 0, 54064, '/BD-T2/IMG/image10.jpg', 4, 111, 56, 1, 1, 0, 0, 1),
+(10, 'Hotel The Visage', 0, 54064, '/BD-T2/IMG/image10.jpg', 4, 111, 55, 1, 1, 0, 0, 1),
 (11, 'Sofitel Bahrain Zallaq Thalassa sea & spa', 9, 90000, '/BD-T2/IMG/image11.jpg', 5, 1000, 33, 1, 1, 1, 1, 1),
 (12, 'Kenana Hotel', 10, 39739, '/BD-T2/IMG/image12.jpg', 3, 500, 38, 1, 0, 0, 0, 1),
 (13, 'Batman\'s Hill On Collins', 11, 64616, '/BD-T2/IMG/image13.jpg', 5, 200, 13, 1, 0, 1, 1, 1),
-(14, 'Grand Hyatt Shanghai', 12, 105000, '/BD-T2/IMG/image14.jpg', 5, 700, 37, 1, 0, 1, 1, 1),
-(15, 'Altus Hotel Baku', 13, 6588, '/BD-T2/IMG/image15.jpg', 4, 300, 16, 1, 0, 1, 1, 1),
-(16, 'Days Inn by Wyndham Miami Airport North', 14, 52816, '/BD-T2/IMG/image16.jpg', 3, 15, 7, 1, 0, 0, 0, 0),
+(14, 'Grand Hyatt Shanghai', 12, 105000, '/BD-T2/IMG/image14.jpg', 5, 700, 35, 1, 0, 1, 1, 1),
+(15, 'Altus Hotel Baku', 13, 6588, '/BD-T2/IMG/image15.jpg', 4, 300, 14, 1, 0, 1, 1, 1),
+(16, 'Days Inn by Wyndham Miami Airport North', 14, 52816, '/BD-T2/IMG/image16.jpg', 3, 15, 5, 1, 0, 0, 0, 0),
 (17, 'Santiago Hotel', 15, 22500, '/BD-T2/IMG/image17.jpg', 3, 50, 5, 1, 0, 0, 0, 1),
 (18, 'Fairmont Monte Carlo', 16, 217000, '/BD-T2/IMG/image18.jpg', 4, 200, 20, 1, 1, 1, 1, 1),
 (19, 'Hotel Soho', 17, 83100, '/BD-T2/IMG/image19.jpg', 3, 150, 22, 1, 1, 1, 1, 1);
@@ -203,6 +212,21 @@ CREATE TABLE `hotel_review` (
   `reseña` varchar(256) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Triggers `hotel_review`
+--
+DELIMITER $$
+CREATE TRIGGER `purchase_check_hotel` BEFORE INSERT ON `hotel_review` FOR EACH ROW BEGIN
+	DECLARE counter INT;
+    SELECT COUNT(*) INTO counter FROM historial WHERE id_user = NEW.id_user AND id_hotel = NEW.id_hotel;
+    
+    IF counter = 0 THEN 
+    	SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'El hotel no está en el historial del usuario';
+    END IF;
+END
+$$
+DELIMITER ;
+
 -- --------------------------------------------------------
 
 --
@@ -219,6 +243,21 @@ CREATE TABLE `package_review` (
   `rel_calprecio` int(11) NOT NULL,
   `reseña` varchar(256) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Triggers `package_review`
+--
+DELIMITER $$
+CREATE TRIGGER `purchase_check_pack` BEFORE INSERT ON `package_review` FOR EACH ROW BEGIN
+	DECLARE counter INT;
+    SELECT COUNT(*) INTO counter FROM historial WHERE id_user = NEW.id_user AND id_pack = NEW.id_pack;
+    
+    IF counter = 0 THEN 
+    	SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'El paquete no está en el historial del usuario';
+    END IF;
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -250,7 +289,7 @@ INSERT INTO `paquete` (`id_paquete`, `nombre`, `img`, `aero_ida`, `aero_vuelta`,
 (1, 'Tour San Andreas', '/BD-T2/IMG/imgpck1.jpg', 'LATAM', 'LATAM', 1, 1, '2023-05-30', '2023-06-06', 100000, 15, 30, 3),
 (2, 'Vice City', '/BD-T2/IMG/imgpck2.jpg', 'LATAM', 'FlyUS', 2, 3, '2023-06-21', '2023-06-30', 120000, 40, 100, 3),
 (3, 'F1 Races 1 - 3', '/BD-T2/IMG/imgpck3.jpg', 'LATAM', 'Emirates', 4, 4, '2023-06-01', '2023-06-18', 3000000, 49, 70, 2),
-(4, 'F1 Races 4 - 6', '/BD-T2/IMG/imgpck4.jpg', 'LATAM', 'Emirates', 5, 5, '2023-07-01', '2023-07-23', 2500000, 44, 60, 2),
+(4, 'F1 Races 4 - 6', '/BD-T2/IMG/imgpck4.jpg', 'LATAM', 'Emirates', 5, 5, '2023-07-01', '2023-07-23', 2500000, 43, 60, 2),
 (5, 'F1 Races 7 - 8', '/BD-T2/IMG/imgpck5.jpg', 'LATAM', 'Emirates', 6, 6, '2023-08-03', '2023-08-13', 1500000, 7, 10, 2),
 (7, 'F1 Spanish Grand Prix ', '/BD-T2/IMG/imgpck6.jpg', 'LATAM', 'IBERIA', 7, 7, '2023-08-17', '2023-08-20', 600000, 11, 20, 2);
 
@@ -399,7 +438,7 @@ ALTER TABLE `wishlist`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `grupo_ciudades`
@@ -417,7 +456,7 @@ ALTER TABLE `grupo_hospedajes`
 -- AUTO_INCREMENT for table `historial`
 --
 ALTER TABLE `historial`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `hotel`
