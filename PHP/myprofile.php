@@ -41,7 +41,8 @@ if ($stmt = mysqli_prepare($conn, "SELECT email, birthday FROM users WHERE id = 
 <h3> Reseñas de hoteles: </h3>
 <?php
     $query = "
-    SELECT id_hotel,limpieza,servicio,deco,camas,reseña FROM hotel_review WHERE id_user = $id
+    SELECT id_hotel,limpieza,servicio,deco,camas,reseña,fecha FROM hotel_review WHERE id_user = $id
+    ORDER BY fecha DESC
     ";
     $result = mysqli_query($conn, $query);
     if (mysqli_num_rows($result) > 0){ 
@@ -52,6 +53,7 @@ if ($stmt = mysqli_prepare($conn, "SELECT email, birthday FROM users WHERE id = 
             $deco = $row['deco'];
             $camas = $row['camas'];
             $reseña = $row['reseña'];
+            $fecha = $row['fecha'];
             $source = 'hotel';
             $url = "info.php?source=" . urlencode($source) . "&id=" . urlencode($id_hotel);
 
@@ -66,6 +68,7 @@ if ($stmt = mysqli_prepare($conn, "SELECT email, birthday FROM users WHERE id = 
                     $imagen = $row2['img'];
                     echo "<a class='hyperlink' href='$url'>";
                     echo "Nombre: $nombre<br>";
+                    echo "Fecha: $fecha<br>";
                     echo "<img src='$imagen' alt='Item Image' class='item-img'><br><br>";
                     echo "</a>";
                 }
@@ -89,7 +92,8 @@ if ($stmt = mysqli_prepare($conn, "SELECT email, birthday FROM users WHERE id = 
 
 <?php
     $query = "
-    SELECT id_pack,cal_hoteles,cal_transport,cal_servicio,rel_calprecio,reseña FROM package_review WHERE id_user = $id
+    SELECT id_pack,cal_hoteles,cal_transport,cal_servicio,rel_calprecio,reseña,fecha FROM package_review WHERE id_user = $id
+    ORDER BY fecha DESC
     ";
     $result = mysqli_query($conn, $query);
     if (mysqli_num_rows($result) > 0){ 
@@ -100,6 +104,7 @@ if ($stmt = mysqli_prepare($conn, "SELECT email, birthday FROM users WHERE id = 
             $cal_servicio = $row['cal_servicio'];
             $rel_calprecio = $row['rel_calprecio'];
             $reseña = $row['reseña'];
+            $fecha = $row['fecha'];
             $source = 'paquete';
             $url = "info.php?source=" . urlencode($source) . "&id=" . urlencode($id_pack);
 
@@ -114,6 +119,7 @@ if ($stmt = mysqli_prepare($conn, "SELECT email, birthday FROM users WHERE id = 
                     $imagen = $row2['img'];
                     echo "<a class='hyperlink' href='$url'>";
                     echo "Nombre: $nombre<br>";
+                    echo "Fecha: $fecha<br>";
                     echo "<img src='$imagen' alt='Item Image' class='item-img'><br><br>";
                     echo "</a>";
                 }

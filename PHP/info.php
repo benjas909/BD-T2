@@ -371,7 +371,8 @@
 
 if($source==='hotel'){
     $query = "
-    SELECT id_user,limpieza,servicio,deco,camas,reseña FROM hotel_review WHERE id_hotel = $itemid
+    SELECT id_user,limpieza,servicio,deco,camas,reseña,fecha FROM hotel_review WHERE id_hotel = $itemid
+    ORDER BY fecha DESC;
     ";
     $result = mysqli_query($conn, $query);
     if (mysqli_num_rows($result) > 0){ 
@@ -382,6 +383,7 @@ if($source==='hotel'){
             $deco = $row['deco'];
             $camas = $row['camas'];
             $reseña = $row['reseña'];
+            $fecha = $row['fecha'];
 
             $query = "
             SELECT username FROM users WHERE id = $reviewuserid
@@ -392,6 +394,7 @@ if($source==='hotel'){
                 while ($row2 = mysqli_fetch_assoc($result2)) {
                     $username = $row2['username'];
                     echo "$username<br>";
+                    echo "Fecha: $fecha <br>";
                 }
 
             }
@@ -410,7 +413,8 @@ if($source==='hotel'){
 
 if($source==='paquete'){
     $query = "
-    SELECT id_user,cal_hoteles,cal_transport,cal_servicio,rel_calprecio,reseña FROM package_review WHERE id_pack = $itemid
+    SELECT id_user,cal_hoteles,cal_transport,cal_servicio,rel_calprecio,reseña,fecha FROM package_review WHERE id_pack = $itemid
+    ORDER BY fecha DESC;
     ";
     $result = mysqli_query($conn, $query);
     if (mysqli_num_rows($result) > 0){ 
@@ -421,6 +425,7 @@ if($source==='paquete'){
             $cal_servicio = $row['cal_servicio'];
             $rel_calprecio = $row['rel_calprecio'];
             $reseña = $row['reseña'];
+            $fecha = $row['fecha'];
 
             $query = "
             SELECT username FROM users WHERE id = $reviewuserid
@@ -431,6 +436,7 @@ if($source==='paquete'){
                 while ($row2 = mysqli_fetch_assoc($result2)) {
                     $username = $row2['username'];
                     echo "$username<br>";
+                    echo "Fecha: $fecha <br>";
                 }
 
             }
