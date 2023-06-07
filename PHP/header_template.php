@@ -1,6 +1,14 @@
 <?php require 'config/database.php';
 session_start();
 
+function clean_inputs($data)
+    {
+        $data = trim($data);
+        $data = stripslashes($data);
+        $data = htmlspecialchars($data);
+        return $data;
+    }
+
 // Si la persona no ha iniciado sesión, se le redirecciona al login
 if (!isset($_SESSION["isloggedin"]) || $_SESSION["isloggedin"] !== true) {
     // echo '<script>
@@ -12,6 +20,8 @@ if (!isset($_SESSION["isloggedin"]) || $_SESSION["isloggedin"] !== true) {
     // die();
     exit;
 }
+
+
 ?>
 
 <!DOCTYPE html>

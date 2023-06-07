@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 07, 2023 at 01:41 AM
+-- Generation Time: Jun 07, 2023 at 05:19 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -146,7 +146,8 @@ CREATE TABLE `historial` (
 INSERT INTO `historial` (`id`, `id_user`, `id_hotel`, `id_pack`, `ishotel`, `quant`) VALUES
 (13, 5, 10, NULL, 1, 1),
 (14, 5, 4, NULL, 1, 1),
-(15, 5, NULL, 4, 0, 1);
+(15, 5, NULL, 4, 0, 1),
+(16, 5, 2, NULL, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -176,7 +177,7 @@ CREATE TABLE `hotel` (
 
 INSERT INTO `hotel` (`id_hotel`, `nombre`, `ciudad`, `precionoche`, `img`, `estrellas`, `hab_totales`, `hab_disp`, `parking`, `piscina`, `lavanderia`, `mascotas`, `desayuno`) VALUES
 (1, 'Richman Hotel', 1, 37944, '/BD-T2/IMG/image1.jpg', 3, 53, 10, 1, 1, 1, 0, 0),
-(2, 'Hotel Jefferson', 1, 26991, '/BD-T2/IMG/image2.jpg', 4, 106, 73, 1, 1, 1, 1, 1),
+(2, 'Hotel Jefferson', 1, 26991, '/BD-T2/IMG/image2.jpg', 4, 106, 72, 1, 1, 1, 1, 1),
 (3, 'Templar Hotel', 1, 64118, '/BD-T2/IMG/image3.jpg', 4, 102, 12, 1, 0, 0, 1, 1),
 (4, 'Hotel Ocean View', 2, 46381, '/BD-T2/IMG/image4.jpg', 5, 150, 19, 1, 1, 1, 1, 1),
 (5, 'Hotel Moist Palms', 2, 61975, '/BD-T2/IMG/image5.jpg', 4, 154, 22, 1, 0, 1, 0, 0),
@@ -213,6 +214,14 @@ CREATE TABLE `hotel_review` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
+-- Dumping data for table `hotel_review`
+--
+
+INSERT INTO `hotel_review` (`id`, `id_user`, `id_hotel`, `limpieza`, `servicio`, `deco`, `camas`, `reseña`) VALUES
+(1, 5, 2, 2, 4, 3, 3, 'decente'),
+(2, 5, 10, 4, 3, 4, 4, 'bastante bien la verda');
+
+--
 -- Triggers `hotel_review`
 --
 DELIMITER $$
@@ -243,6 +252,13 @@ CREATE TABLE `package_review` (
   `rel_calprecio` int(11) NOT NULL,
   `reseña` varchar(256) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `package_review`
+--
+
+INSERT INTO `package_review` (`id`, `id_user`, `id_pack`, `cal_hoteles`, `cal_transport`, `cal_servicio`, `rel_calprecio`, `reseña`) VALUES
+(1, 5, 4, 4, 5, 4, 2, 'Bastante bien, pero algo caro, y Ferrari dio vergüenza como siempre');
 
 --
 -- Triggers `package_review`
@@ -438,7 +454,7 @@ ALTER TABLE `wishlist`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `grupo_ciudades`
@@ -456,7 +472,7 @@ ALTER TABLE `grupo_hospedajes`
 -- AUTO_INCREMENT for table `historial`
 --
 ALTER TABLE `historial`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `hotel`
@@ -468,13 +484,13 @@ ALTER TABLE `hotel`
 -- AUTO_INCREMENT for table `hotel_review`
 --
 ALTER TABLE `hotel_review`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `package_review`
 --
 ALTER TABLE `package_review`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `paquete`
