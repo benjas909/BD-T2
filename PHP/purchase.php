@@ -42,7 +42,7 @@
             }
         }
 
-        mysqli_query($conn, "INSERT INTO historial SELECT * FROM cart");
+        mysqli_query($conn, "INSERT INTO historial (id_user, id_hotel, id_pack, ishotel, quant) SELECT id_user, id_hotel, id_pack, ishotel, quant FROM cart");
         mysqli_query($conn, "DELETE FROM cart WHERE id_user=$userid");
         echo "<script>alert('Has reservado los contenidos de tu carrito');
                       window.location = '$prev_url';

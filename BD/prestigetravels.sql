@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 08, 2023 at 01:04 AM
+-- Generation Time: Jun 08, 2023 at 01:47 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -151,11 +151,7 @@ CREATE TABLE `historial` (
 --
 
 INSERT INTO `historial` (`id`, `id_user`, `id_hotel`, `id_pack`, `ishotel`, `quant`) VALUES
-(13, 5, 10, NULL, 1, 1),
-(14, 5, 4, NULL, 1, 1),
-(15, 5, NULL, 4, 0, 1),
-(16, 5, 2, NULL, 1, 1),
-(17, 5, NULL, 1, 0, 1);
+(23, 5, 2, NULL, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -186,7 +182,7 @@ CREATE TABLE `hotel` (
 
 INSERT INTO `hotel` (`id_hotel`, `nombre`, `ciudad`, `precionoche`, `img`, `estrellas`, `hab_totales`, `hab_disp`, `parking`, `piscina`, `lavanderia`, `mascotas`, `desayuno`, `calif_promedio`) VALUES
 (1, 'Richman Hotel', 1, 37944, '/BD-T2/IMG/image1.jpg', 3, 53, 7, 1, 1, 1, 0, 0, 0),
-(2, 'Hotel Jefferson', 1, 26991, '/BD-T2/IMG/image2.jpg', 4, 106, 70, 1, 1, 1, 1, 1, 0),
+(2, 'Hotel Jefferson', 1, 26991, '/BD-T2/IMG/image2.jpg', 4, 106, 61, 1, 1, 1, 1, 1, 0),
 (3, 'Templar Hotel', 1, 64118, '/BD-T2/IMG/image3.jpg', 4, 102, 9, 1, 0, 0, 1, 1, 0),
 (4, 'Hotel Ocean View', 2, 46381, '/BD-T2/IMG/image4.jpg', 5, 150, 19, 1, 1, 1, 1, 1, 0),
 (5, 'Hotel Moist Palms', 2, 61975, '/BD-T2/IMG/image5.jpg', 4, 154, 22, 1, 0, 1, 0, 0, 0),
@@ -307,20 +303,21 @@ CREATE TABLE `paquete` (
   `precio_persona` int(11) NOT NULL,
   `paq_disp` int(11) NOT NULL,
   `paq_totales` int(11) NOT NULL,
-  `max_personas` int(11) NOT NULL
+  `max_personas` int(11) NOT NULL,
+  `calif_promedio` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `paquete`
 --
 
-INSERT INTO `paquete` (`id_paquete`, `nombre`, `img`, `aero_ida`, `aero_vuelta`, `id_hospedajes`, `id_ciudades`, `f_salida`, `f_llegada`, `precio_persona`, `paq_disp`, `paq_totales`, `max_personas`) VALUES
-(1, 'Tour San Andreas', '/BD-T2/IMG/imgpck1.jpg', 'LATAM', 'LATAM', 1, 1, '2023-05-30', '2023-06-06', 100000, 14, 30, 3),
-(2, 'Vice City', '/BD-T2/IMG/imgpck2.jpg', 'LATAM', 'FlyUS', 2, 3, '2023-06-21', '2023-06-30', 120000, 40, 100, 3),
-(3, 'F1 Races 1 - 3', '/BD-T2/IMG/imgpck3.jpg', 'LATAM', 'Emirates', 4, 4, '2023-06-01', '2023-06-18', 3000000, 48, 70, 2),
-(4, 'F1 Races 4 - 6', '/BD-T2/IMG/imgpck4.jpg', 'LATAM', 'Emirates', 5, 5, '2023-07-01', '2023-07-23', 2500000, 43, 60, 2),
-(5, 'F1 Races 7 - 8', '/BD-T2/IMG/imgpck5.jpg', 'LATAM', 'Emirates', 6, 6, '2023-08-03', '2023-08-13', 1500000, 7, 10, 2),
-(7, 'F1 Spanish Grand Prix ', '/BD-T2/IMG/imgpck6.jpg', 'LATAM', 'IBERIA', 7, 7, '2023-08-17', '2023-08-20', 600000, 11, 20, 2);
+INSERT INTO `paquete` (`id_paquete`, `nombre`, `img`, `aero_ida`, `aero_vuelta`, `id_hospedajes`, `id_ciudades`, `f_salida`, `f_llegada`, `precio_persona`, `paq_disp`, `paq_totales`, `max_personas`, `calif_promedio`) VALUES
+(1, 'Tour San Andreas', '/BD-T2/IMG/imgpck1.jpg', 'LATAM', 'LATAM', 1, 1, '2023-05-30', '2023-06-06', 100000, 14, 30, 3, 0),
+(2, 'Vice City', '/BD-T2/IMG/imgpck2.jpg', 'LATAM', 'FlyUS', 2, 3, '2023-06-21', '2023-06-30', 120000, 40, 100, 3, 0),
+(3, 'F1 Races 1 - 3', '/BD-T2/IMG/imgpck3.jpg', 'LATAM', 'Emirates', 4, 4, '2023-06-01', '2023-06-18', 3000000, 48, 70, 2, 0),
+(4, 'F1 Races 4 - 6', '/BD-T2/IMG/imgpck4.jpg', 'LATAM', 'Emirates', 5, 5, '2023-07-01', '2023-07-23', 2500000, 43, 60, 2, 0),
+(5, 'F1 Races 7 - 8', '/BD-T2/IMG/imgpck5.jpg', 'LATAM', 'Emirates', 6, 6, '2023-08-03', '2023-08-13', 1500000, 7, 10, 2, 0),
+(7, 'F1 Spanish Grand Prix ', '/BD-T2/IMG/imgpck6.jpg', 'LATAM', 'IBERIA', 7, 7, '2023-08-17', '2023-08-20', 600000, 11, 20, 2, 0);
 
 -- --------------------------------------------------------
 
@@ -343,9 +340,7 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id`, `username`, `password`, `email`, `birthday`) VALUES
 (4, 'benjamin', '$2y$10$/4p7Mvn.I9mTTCH/IAEdlOK9Qa8NkoaaK5bWQOAlNrs9Thx/w/Ela', 'benjamin.aguilera64@gmail.com', '2001-08-27'),
 (5, 'hasbulla', '$2y$10$5vYjqepQyXdnc.geXJ8zteZwo9bPFuTC7jWxUUh5WeRrKSnaMPhoO', 'hasbulla.delbulla@gmail.com', '2010-04-08'),
-(11, 'banjos', '$2y$10$aBiQcHDaCqGZTvV9qc5iTeaPVm2CxlXZgq6s8J9HAm04JuF9EQEei', 'banjos@gmail.com', '2023-06-07'),
-(13, 'carlita', '$2y$10$OewyQBPG3/DNL8J1gy30g.yI38yLYZ5u2V25XC/mu/WUz7.NHvqJ6', 'holacarlita@gmail.com', '2023-06-01'),
-(16, 'darius', '$2y$10$fUC2c2YIk2V6Zzi.1a/rT.3rqI0jtC5oOOapWPchDaYJ/VXQFCKy2', 'darius@mama.com', '2023-05-02');
+(11, 'banjos', '$2y$10$aBiQcHDaCqGZTvV9qc5iTeaPVm2CxlXZgq6s8J9HAm04JuF9EQEei', 'banjos@gmail.com', '2023-06-07');
 
 -- --------------------------------------------------------
 
@@ -468,7 +463,7 @@ ALTER TABLE `wishlist`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `grupo_ciudades`
@@ -486,7 +481,7 @@ ALTER TABLE `grupo_hospedajes`
 -- AUTO_INCREMENT for table `historial`
 --
 ALTER TABLE `historial`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `hotel`
@@ -498,7 +493,7 @@ ALTER TABLE `hotel`
 -- AUTO_INCREMENT for table `hotel_review`
 --
 ALTER TABLE `hotel_review`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `package_review`
@@ -522,7 +517,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `wishlist`
 --
 ALTER TABLE `wishlist`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- Constraints for dumped tables

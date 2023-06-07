@@ -38,6 +38,7 @@ if (!isset($_SESSION["isloggedin"]) || $_SESSION["isloggedin"] !== true) {
 <body>
 
     <div class="container">
+        <div class="navbar">
         <ul>
             <li style="float:left"><a href="index.php">Home</a></li>
             <!-- <li class="logo">PRESTIGE</li> -->
@@ -53,3 +54,4 @@ if (!isset($_SESSION["isloggedin"]) || $_SESSION["isloggedin"] !== true) {
             <li style="float:right"><a href="cart.php">Carrito</a></li>
             <li style="float:right"><a href="advancedsearch.php">Busqueda Avanzada</a></li>
         </ul>
+        </div>

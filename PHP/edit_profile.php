@@ -72,18 +72,25 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 ?>
 
+<div class="edit-profile">
+    <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+        <p><span class="error">* Campo obligatorio</span></p>
+    
+        E-mail: <input type="text" name="email" value="<?php echo $email ?>">
+        <span class="error">*
+            <?php echo $emailError; ?>
+        </span><br>
+    
+        Fecha de Nacimiento: <input type="date" name="birth">
+        <span class="error">*
+            <?php echo $bdayError; ?>
+        </span><br>
+        <input type="submit">
+    </form>
+</div>
 
-<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
-    <p><span class="error">* Campo obligatorio</span></p>
+<div>
+<a href="delete_profile.php" onclick="return confirm('¿Estás seguro?');">Eliminar Cuenta</a>
+</div>
 
-    E-mail: <input type="text" name="email" value="<?php echo $email ?>">
-    <span class="error">*
-        <?php echo $emailError; ?>
-    </span><br>
-
-    Fecha de Nacimiento: <input type="date" name="birth">
-    <span class="error">*
-        <?php echo $bdayError; ?>
-    </span><br>
-    <input type="submit">
-</form>
+<?php include 'footer_template.php'; ?>
