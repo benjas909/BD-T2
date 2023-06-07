@@ -80,6 +80,39 @@ if ($result) {
 }
 
 ?>
+
+<h3 class="titletext"> Top 10 hoteles </h3>
+
+<?php
+
+    $query = "
+    SELECT nombre,img,estrellas FROM hotel ORDER BY estrellas DESC
+    LIMIT 10
+    ";
+    $result = mysqli_query($conn, $query);
+    if (mysqli_num_rows($result) > 0){ 
+        while ($row = mysqli_fetch_assoc($result)) {
+            $nombre = $row['nombre'];
+            $imagen = $row['img'];
+            $estrellas = $row['estrellas'];
+
+            $source = 'hotel';
+            $url = "info.php?source=" . urlencode($source) . "&id=" . urlencode($id);
+            echo "<a class='hyperlink' href='$url'>";
+            echo "<div class= 'card'>";
+
+            echo "Nombre: $nombre<br>";
+            echo "Imagen: <img src='$imagen' alt='Item Image' class='item-img'><br><br>";
+            echo "Puntuación: $estrellas/5";
+
+            echo "</div>";
+            echo "</a>";
+        }
+    }
+
+?>
+
+<h3 class="titletext"> Top 10 paquetes </h3>
 </div>
 
 <?php
