@@ -366,7 +366,86 @@
         }
     ?>
     <!-- <h3>Deja una reseña</h3> -->
+<br><br>
+<?php
 
+if($source==='hotel'){
+    $query = "
+    SELECT id_user,limpieza,servicio,deco,camas,reseña FROM hotel_review WHERE id_hotel = $itemid
+    ";
+    $result = mysqli_query($conn, $query);
+    if (mysqli_num_rows($result) > 0){ 
+        while ($row = mysqli_fetch_assoc($result)) {
+            $reviewuserid = $row['id_user'];
+            $limpieza = $row['limpieza'];
+            $servicio = $row['servicio'];
+            $deco = $row['deco'];
+            $camas = $row['camas'];
+            $reseña = $row['reseña'];
+
+            $query = "
+            SELECT username FROM users WHERE id = $reviewuserid
+            ";
+
+            $result2 = mysqli_query($conn, $query);
+            if (mysqli_num_rows($result2) > 0){ 
+                while ($row2 = mysqli_fetch_assoc($result2)) {
+                    $username = $row2['username'];
+                    echo "$username<br>";
+                }
+
+            }
+            echo "Limpieza: $limpieza/5<br>";
+            echo "Servicio: $servicio/5<br>";
+            echo "Decoración: $deco/5<br>";
+            echo "Camas: $camas/5<br>";
+            echo "Reseña: $reseña";
+            echo "<br><br>";
+        }
+    } else {
+        echo "No hay reviews";
+    }    
+}
+
+
+if($source==='paquete'){
+    $query = "
+    SELECT id_user,cal_hoteles,cal_transport,cal_servicio,rel_calprecio,reseña FROM package_review WHERE id_pack = $itemid
+    ";
+    $result = mysqli_query($conn, $query);
+    if (mysqli_num_rows($result) > 0){ 
+        while ($row = mysqli_fetch_assoc($result)) {
+            $reviewuserid = $row['id_user'];
+            $cal_hoteles = $row['cal_hoteles'];
+            $cal_transport = $row['cal_transport'];
+            $cal_servicio = $row['cal_servicio'];
+            $rel_calprecio = $row['rel_calprecio'];
+            $reseña = $row['reseña'];
+
+            $query = "
+            SELECT username FROM users WHERE id = $reviewuserid
+            ";
+
+            $result2 = mysqli_query($conn, $query);
+            if (mysqli_num_rows($result2) > 0){ 
+                while ($row2 = mysqli_fetch_assoc($result2)) {
+                    $username = $row2['username'];
+                    echo "$username<br>";
+                }
+
+            }
+            echo "Calificación hoteles: $cal_hoteles/5<br>";
+            echo "Transporte: $cal_transport/5<br>";
+            echo "Servicio: $cal_servicio/5<br>";
+            echo "Precio: $rel_calprecio/5<br>";
+            echo "Reseña: $reseña";
+            echo "<br><br>";
+        }
+    } else {
+        echo "No hay reviews";
+    }    
+}
+?>
 
 </div>
 </div>
