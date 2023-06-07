@@ -113,7 +113,7 @@
 
 }
 
-.cart-container {
+.container .cart-container {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -122,28 +122,28 @@
 }
 
 
-.cart-container .totalprice {
+.container .cart-container .totalprice {
     align-self: flex-end;
 }
 
-.cart-container .card {
+.container .cart-container .card {
     display: flex;
     flex-direction: row;
     align-items: flex-start;
     gap: 4em;
 }
 
-.cart-container .card .image img {
+.container .cart-container .card .image img {
     max-height: auto;
     max-width: 400px;
 
 }
 
-.cart-container .card .price h2 {
+.container .cart-container .card .price h2 {
     align-self: flex-end;
 }
 
-.wish-container {
+.container .wish-container {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -151,16 +151,27 @@
     gap: 4em;
 }
 
-.wish-container .card {
+.container .wish-container .card {
     display: flex;
     flex-direction: row;
     align-items: flex-start;
     gap: 4em;
 }
 
-.wish-container .card .image img {
+.container .wish-container .card .image img {
     max-height: auto;
     max-width: 400px;
+}
+
+
+.container .profile-card {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.container .profile-card .profile-links {
+    align-self: flex-end;
 }
 
 /* .container .flex-container .info{

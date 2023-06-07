@@ -75,52 +75,53 @@
             }
 
         }
-    }
-
-    if (empty($_POST["birth"])) {
-        $bdayError = "La fecha de nacimiento es obligatoria";
-    } else {
-        $birth = clean_inputs($_POST["birth"]);
-    }
-
-
-
-    if (empty($_POST["password"])) {
-        $passError = "Contraseña requerida.";
-    } else {
-        $password = clean_inputs($_POST["password"]);
-    }
-
-    if (empty($_POST["confirm_password"])) {
-        $confirmError = "Este campo es obligatorio.";
-    } else {
-        $confirm_password = clean_inputs($_POST["confirm_password"]);
-
-        if (empty($confirmError) && ($confirm_password != $password)) {
-            $confirmError = "Las contraseñas no son iguales.";
+        
+        if (empty($_POST["birth"])) {
+            $bdayError = "La fecha de nacimiento es obligatoria";
+        } else {
+            $birth = clean_inputs($_POST["birth"]);
         }
-    }
-
-    if (empty($usrNameError) && empty($emailError) && empty($passError) && empty($confirmError) && empty($bdayError)) {
-
-        if ($stmt = mysqli_prepare($conn, "INSERT INTO users (username, password, email, birthday) VALUES (?, ?, ?, ?)")) {
-            mysqli_stmt_bind_param($stmt, "ssss", $param_username, $param_password, $param_email, $param_birthday);
-
-            $param_username = $username;
-            $param_password = password_hash($password, PASSWORD_DEFAULT);
-            $param_email = $email;
-            $param_birthday = $birth;
-
-            if (mysqli_stmt_execute($stmt)) {
-
-                header("location: login.php");
-            } else {
-                echo "Error de registro, revisar. (dev)";
+    
+    
+    
+        if (empty($_POST["password"])) {
+            $passError = "Contraseña requerida.";
+        } else {
+            $password = clean_inputs($_POST["password"]);
+        }
+    
+        if (empty($_POST["confirm_password"])) {
+            $confirmError = "Este campo es obligatorio.";
+        } else {
+            $confirm_password = clean_inputs($_POST["confirm_password"]);
+    
+            if (empty($confirmError) && ($confirm_password != $password)) {
+                $confirmError = "Las contraseñas no son iguales.";
             }
-
-            mysqli_stmt_close($stmt);
+        }
+    
+        if (empty($usrNameError) && empty($emailError) && empty($passError) && empty($confirmError) && empty($bdayError)) {
+    
+            if ($stmt = mysqli_prepare($conn, "INSERT INTO users (username, password, email, birthday) VALUES (?, ?, ?, ?)")) {
+                mysqli_stmt_bind_param($stmt, "ssss", $param_username, $param_password, $param_email, $param_birthday);
+    
+                $param_username = $username;
+                $param_password = password_hash($password, PASSWORD_DEFAULT);
+                $param_email = $email;
+                $param_birthday = $birth;
+    
+                if (mysqli_stmt_execute($stmt)) {
+    
+                    header("location: login.php");
+                } else {
+                    echo "Error de registro, revisar. (dev)";
+                }
+    
+                mysqli_stmt_close($stmt);
+            }
         }
     }
+
 
 
     ?>

@@ -1,20 +1,24 @@
 <?php include 'header_template.php';
 
-echo $_SESSION["username"];
 
 $id = $_SESSION["id"];
 
+echo "<br><br>";
+echo "<div class='profile-card'>";
 if ($stmt = mysqli_prepare($conn, "SELECT email, birthday FROM users WHERE id = ?")) {
     mysqli_stmt_bind_param($stmt, "s", $id);
-
+    
     if (mysqli_stmt_execute($stmt)) {
         mysqli_stmt_store_result($stmt);
-
+        
         mysqli_stmt_bind_result($stmt, $email, $birthday);
-
+        
         if (mysqli_stmt_fetch($stmt)) {
-            echo "email: " . $email . "<br>";
-            echo "Fecha de Nacimiento: " . $birthday . "<br>";
+            echo "<div class='user_info'>";
+            echo "<h2>" .$_SESSION["username"] . "</h2>";
+            echo "<h3>email: " . $email . "</h3>";
+            echo "<h3>Fecha de Nacimiento: " . $birthday . "</h3>";
+            echo "</div>";
         }
     }
 } else {
@@ -22,8 +26,18 @@ if ($stmt = mysqli_prepare($conn, "SELECT email, birthday FROM users WHERE id = 
 }
 
 ?>
+<div class="profile-links">
+    <a href="wishlist.php">
+        <h3>Mi Wishlist</h3></a>
+    <a href="cart.php">
+        <h3>Mi carrito</h3></a>
+    <a href="edit_profile.php">Editar Perfil</a>
+    
+</div>
+</div>
 
-<a href="wishlist.php">Mi Wishlist</a>
+<br><br>
+
 <h3> Reseñas de hoteles: </h3>
 <?php
     $query = "
@@ -118,6 +132,7 @@ if ($stmt = mysqli_prepare($conn, "SELECT email, birthday FROM users WHERE id = 
     
 
 ?>
+</div>
 <?php
 include 'footer_template.php';
 ?>
