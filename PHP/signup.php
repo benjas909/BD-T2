@@ -8,7 +8,6 @@
 </head>
 
 <body>
-    <a href="index.php">Home</a>
 
     <?php
     function clean_inputs($data)

@@ -171,8 +171,6 @@
                         $param_promedio = ($limp + $serv + $deco + $camas)/4;
                         try {
                             mysqli_stmt_execute($stmt);
-                            $query= "CALL calculateAvgCalifHotel($itemid)";
-                            $result = mysqli_query($conn, $query);
                             header("location: " . htmlspecialchars($_SERVER['PHP_SELF']) . "?source=$source&id=$itemid");
                         } catch (mysqli_sql_exception $e) {
                             // Atrapar excepción
@@ -233,8 +231,6 @@
 
                         try {
                             mysqli_stmt_execute($stmt);
-                            $query= "CALL calculateAvgCalifPaquete($itemid)";
-                            $result = mysqli_query($conn, $query);
                             header("location: " . htmlspecialchars($_SERVER['PHP_SELF']) . "?source=$source&id=$itemid");
 
                         } catch (mysqli_sql_exception $e) {
@@ -253,6 +249,7 @@
 
         echo "<h3>Ya has comprado/reservado este " . (($source == 'hotel') ? "hotel" : "paquete") . "? Deja una reseña!";
 
+        echo "<div class='create-review'>";
         if($source == 'hotel') {
             echo "<form method='post' action='" . htmlspecialchars($_SERVER['PHP_SELF']) . "?source=$source&id=$itemid'>";
             echo "<p><span class='error'>* Campo obligatorio</span></p><br>";
@@ -368,20 +365,25 @@
 
             echo "<input type='submit' value='Enviar'>";
             echo "</form>";
+
         }
     ?>
+    </div>
     <!-- <h3>Deja una reseña</h3> -->
 <br><br>
 <?php
 
 if($source==='hotel'){
     $query = "
-    SELECT id_user,limpieza,servicio,deco,camas,reseña,fecha FROM hotel_review WHERE id_hotel = $itemid
+    SELECT id, id_user,limpieza,servicio,deco,camas,reseña,fecha FROM hotel_review WHERE id_hotel = $itemid
     ORDER BY fecha DESC;
     ";
     $result = mysqli_query($conn, $query);
     if (mysqli_num_rows($result) > 0){ 
         while ($row = mysqli_fetch_assoc($result)) {
+            echo "<div class='hotel-review'>";
+
+            $reviewid = $row['id'];
             $reviewuserid = $row['id_user'];
             $limpieza = $row['limpieza'];
             $servicio = $row['servicio'];
@@ -408,7 +410,15 @@ if($source==='hotel'){
             echo "Decoración: $deco/5<br>";
             echo "Camas: $camas/5<br>";
             echo "Reseña: $reseña";
+
+            if ($userid == $reviewuserid){
+                echo "<a href='edit_review.php?revid=$reviewid&src=$source'>
+                <h4>Editar reseña</h4></a>";
+
+            }
+            echo "</div>";
             echo "<br><br>";
+
         }
     } else {
         echo "No hay reviews";
