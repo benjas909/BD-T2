@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 08-06-2023 a las 05:16:09
+-- Tiempo de generación: 08-06-2023 a las 05:37:29
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -243,7 +243,7 @@ CREATE TABLE `hotel` (
 
 INSERT INTO `hotel` (`id_hotel`, `nombre`, `ciudad`, `precionoche`, `img`, `estrellas`, `hab_totales`, `hab_disp`, `parking`, `piscina`, `lavanderia`, `mascotas`, `desayuno`, `calif_promedio`) VALUES
 (1, 'Richman Hotel', 1, 37944, '/BD-T2/IMG/image1.jpg', 3, 53, 7, 1, 1, 1, 0, 0, 0),
-(2, 'Hotel Jefferson', 1, 26991, '/BD-T2/IMG/image2.jpg', 4, 106, 51, 1, 1, 1, 1, 1, 0),
+(2, 'Hotel Jefferson', 1, 26991, '/BD-T2/IMG/image2.jpg', 4, 106, 51, 1, 1, 1, 1, 1, 3),
 (3, 'Templar Hotel', 1, 64118, '/BD-T2/IMG/image3.jpg', 4, 102, 9, 1, 0, 0, 1, 1, 0),
 (4, 'Hotel Ocean View', 2, 46381, '/BD-T2/IMG/image4.jpg', 5, 150, 18, 1, 1, 1, 1, 1, 0),
 (5, 'Hotel Moist Palms', 2, 61975, '/BD-T2/IMG/image5.jpg', 4, 154, 22, 1, 0, 1, 0, 0, 0),
@@ -280,6 +280,14 @@ CREATE TABLE `hotel_review` (
   `reseña` varchar(256) DEFAULT NULL,
   `review_promedio` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `hotel_review`
+--
+
+INSERT INTO `hotel_review` (`id`, `id_user`, `id_hotel`, `fecha`, `limpieza`, `servicio`, `deco`, `camas`, `reseña`, `review_promedio`) VALUES
+(11, 18, 2, '2023-06-07 23:17:11', 5, 5, 5, 5, 'muy bueno', 5),
+(12, 18, 2, '2023-06-07 23:17:33', 1, 1, 1, 1, 'muy malo', 1);
 
 --
 -- Disparadores `hotel_review`
@@ -363,7 +371,11 @@ INSERT INTO `paquete` (`id_paquete`, `nombre`, `img`, `aero_ida`, `aero_vuelta`,
 (3, 'F1 Races 1 - 3', '/BD-T2/IMG/imgpck3.jpg', 'LATAM', 'Emirates', 4, 4, '2023-06-01', '2023-06-18', 3000000, 47, 70, 2, 0),
 (4, 'F1 Races 4 - 6', '/BD-T2/IMG/imgpck4.jpg', 'LATAM', 'Emirates', 5, 5, '2023-07-01', '2023-07-23', 2500000, 43, 60, 2, 0),
 (5, 'F1 Races 7 - 8', '/BD-T2/IMG/imgpck5.jpg', 'LATAM', 'Emirates', 6, 6, '2023-08-03', '2023-08-13', 1500000, 7, 10, 2, 0),
-(7, 'F1 Spanish Grand Prix ', '/BD-T2/IMG/imgpck6.jpg', 'LATAM', 'IBERIA', 7, 7, '2023-08-17', '2023-08-20', 600000, 11, 20, 2, 0);
+(7, 'F1 Spanish Grand Prix ', '/BD-T2/IMG/imgpck6.jpg', 'LATAM', 'IBERIA', 7, 7, '2023-08-17', '2023-08-20', 600000, 11, 20, 2, 0),
+(8, 'El mejor paquete de la vida', '/BD-T2/IMG/imgpck1.jpg', 'LATAM', 'LATAM', 2, 2, '2023-06-12', '2023-06-29', 3000, 20, 50, 3, 0),
+(9, 'Paquete las siete tazas', '/BD-T2/IMG/imgpck1.jpg', 'LATAM', 'LATAM', 4, 2, '2023-06-01', '2023-06-28', 4000, 40, 60, 2, 0),
+(10, 'Paquete Pichilemu', '/BD-T2/IMG/imgpck1.jpg', 'Emirates', 'Emirates', 1, 1, '2023-06-26', '2023-06-30', 1000, 20, 45, 2, 0),
+(11, 'Paquete los niu yore', '/BD-T2/IMG/imgpck1.jpg', 'LATAM ', 'Emirates', 2, 5, '2023-06-12', '2023-06-23', 80000, 10, 40, 3, 0);
 
 -- --------------------------------------------------------
 
@@ -543,7 +555,7 @@ ALTER TABLE `hotel`
 -- AUTO_INCREMENT de la tabla `hotel_review`
 --
 ALTER TABLE `hotel_review`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT de la tabla `package_review`
@@ -555,7 +567,7 @@ ALTER TABLE `package_review`
 -- AUTO_INCREMENT de la tabla `paquete`
 --
 ALTER TABLE `paquete`
-  MODIFY `id_paquete` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_paquete` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de la tabla `users`
