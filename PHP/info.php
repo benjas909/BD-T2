@@ -171,6 +171,8 @@
                         $param_promedio = ($limp + $serv + $deco + $camas)/4;
                         try {
                             mysqli_stmt_execute($stmt);
+                            $query= "CALL calculateAvgCalifHotel($itemid)";
+                            $result = mysqli_query($conn, $query);
                             header("location: " . htmlspecialchars($_SERVER['PHP_SELF']) . "?source=$source&id=$itemid");
                         } catch (mysqli_sql_exception $e) {
                             // Atrapar excepción
@@ -231,6 +233,8 @@
 
                         try {
                             mysqli_stmt_execute($stmt);
+                            $query= "CALL calculateAvgCalifPaquete($itemid)";
+                            $result = mysqli_query($conn, $query);
                             header("location: " . htmlspecialchars($_SERVER['PHP_SELF']) . "?source=$source&id=$itemid");
 
                         } catch (mysqli_sql_exception $e) {
