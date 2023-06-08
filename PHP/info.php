@@ -159,8 +159,8 @@
                 
                 if (empty($limpError && empty($servError) && empty($decoError) && empty(($camaError) && empty($commError)))){
 
-                    if ($stmt = mysqli_prepare($conn, "INSERT INTO hotel_review (id_user, id_hotel, limpieza, servicio, deco, camas, reseña) VALUES (?, ?, ?, ?, ?, ?, ?)")) {
-                        mysqli_stmt_bind_param($stmt, "sssssss", $param_userid, $param_itemid, $param_limp, $param_serv, $param_deco, $param_camas, $param_comment);
+                    if ($stmt = mysqli_prepare($conn, "INSERT INTO hotel_review (id_user, id_hotel, limpieza, servicio, deco, camas, reseña,review_promedio) VALUES (?, ?, ?, ?, ?, ?, ?, ?)")) {
+                        mysqli_stmt_bind_param($stmt, "ssssssss", $param_userid, $param_itemid, $param_limp, $param_serv, $param_deco, $param_camas, $param_comment,$param_promedio);
                         $param_userid = $userid;
                         $param_itemid = $itemid;
                         $param_limp = $limp;
@@ -168,7 +168,7 @@
                         $param_deco = $deco;
                         $param_camas = $camas;
                         $param_comment = $comment;
-                        
+                        $param_promedio = ($limp + $serv + $deco + $camas)/4;
                         try {
                             mysqli_stmt_execute($stmt);
                             header("location: " . htmlspecialchars($_SERVER['PHP_SELF']) . "?source=$source&id=$itemid");
@@ -216,8 +216,8 @@
 
                 if(empty($c_hotelError) && empty($c_tranError) && empty($c_servError) && empty($caliprecioError) && empty($commError)) {
 
-                    if($stmt = mysqli_prepare($conn, "INSERT INTO package_review (id_user, id_pack, cal_hoteles, cal_transport, cal_servicio, rel_calprecio, reseña) VALUES (?, ?, ?, ?, ?, ?, ?)")) {
-                        mysqli_stmt_bind_param($stmt, "sssssss", $param_userid, $param_itemid, $param_chotel, $param_ctran, $param_cserv, $param_calipr, $param_comment);
+                    if($stmt = mysqli_prepare($conn, "INSERT INTO package_review (id_user, id_pack, cal_hoteles, cal_transport, cal_servicio, rel_calprecio, reseña,review_promedio) VALUES (?, ?, ?, ?, ?, ?, ?, ?)")) {
+                        mysqli_stmt_bind_param($stmt, "ssssssss", $param_userid, $param_itemid, $param_chotel, $param_ctran, $param_cserv, $param_calipr, $param_comment, $param_promedio);
 
                         $param_userid = $userid;
                         $param_itemid = $itemid;
@@ -226,6 +226,7 @@
                         $param_cserv = $caliserv;
                         $param_calipr = $caliprec;
                         $param_comment = $comment;
+                        $param_promedio = ($calihotel + $calitran + $caliserv + $caliprec)/4;
 
 
                         try {
