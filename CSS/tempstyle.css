@@ -128,6 +128,10 @@
     align-self: flex-end;
 }
 
+.container .cart-container .disc-price {
+    align-self: flex-end;
+}
+
 .container .cart-container .card {
     display: flex;
     flex-direction: row;
@@ -174,6 +178,19 @@
 
 .container .profile-card .profile-links {
     align-self: flex-end;
+}
+
+.container .disc-banner {
+    display: flex;
+    flex-direction: column;
+}
+
+.container h3 {
+    align-self: center;
+}
+
+.container h4 {
+    align-self: center;
 }
 
 /* .container .flex-container .info{

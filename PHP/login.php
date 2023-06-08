@@ -70,6 +70,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             $_SESSION["username"] = $username;
                             $_SESSION["isloggedin"] = true;
                             $_SESSION["id"] = $id;
+                            $_SESSION['cupon'] = 0;
 
                             // Se redirecciona a la página home
                             header("location: index.php");
