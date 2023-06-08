@@ -12,3 +12,7 @@ La calificacion promedio se calcula sacando el promedio de la calificacion de ca
 El cupon tiene un chance de 1/5 de aparecer al recargar la pagina de inicio.
 
 En el filtro de la pagina index, la fecha se considera como un rango, se muestra el paquete si esta dentro del rango de la fecha dada, si no se da una fecha de termino se consideran todos los paquetes desde la fecha de inicio en adelante, y si no se da una fecha de inicio se muestran los paquetes desde la fecha de termino hacia atrás.
+
+CRUD Wishlist, la wishlist se crea al agregar un elemento y se borra al no tener ninguno o al borrar el usuario, consideramos el editar la wishlist como agregar elementos a ella.
+
+CRUD Carrito, el carrito se crea al agregar un elemento y se borra al no tener ninguno o al borrar el usuario, consideramos el editar el carrito como agregar elementos a el.
