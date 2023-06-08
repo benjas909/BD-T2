@@ -1,5 +1,5 @@
 <?php require 'config/database.php';
-
+    session_start();
     $userid = $_GET['id'];
     $prev_url = $_SERVER['HTTP_REFERER'];
     $cartquery = "SELECT * FROM cart WHERE id_user=$userid";
@@ -44,6 +44,7 @@
 
         mysqli_query($conn, "INSERT INTO historial (id_user, id_hotel, id_pack, ishotel, quant) SELECT id_user, id_hotel, id_pack, ishotel, quant FROM cart");
         mysqli_query($conn, "DELETE FROM cart WHERE id_user=$userid");
+        $_SESSION['cupon'] = 0;
         echo "<script>alert('Has reservado los contenidos de tu carrito');
                       window.location = '$prev_url';
               </script>";
