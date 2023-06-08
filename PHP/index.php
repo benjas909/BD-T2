@@ -35,10 +35,10 @@ if ($num == 5) {
         <input type="text" name="ciudad" id="ciudad"><br><br>
 
         <label for="fechainicio">Fecha de inicio:</label>
-        <input type="text" name="fechainicio" id="fechainicio" placeholder="aaaa-mm-dd"><br><br>
+        <input type="date" name="fechainicio" id="fechainicio" placeholder="aaaa-mm-dd"><br><br>
 
         <label for="fechatermino">Fecha de termino:</label>
-        <input type="text" name="fechatermino" id="fechatermino" placeholder="aaaa-mm-dd" ><br><br>
+        <input type="date" name="fechatermino" id="fechatermino" placeholder="aaaa-mm-dd" ><br><br>
 
         <input type="submit" value="Buscar">
 

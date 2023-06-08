@@ -26,8 +26,8 @@ FROM (
     LEFT JOIN ciudad c2 on grupo_ciudades.id_ciudad1 = c2.id
     LEFT JOIN ciudad c3 on grupo_ciudades.id_ciudad1 = c3.id
     WHERE 1=1"
-    . ($fechainicio ? " AND f_salida='$fechainicio'" : "")
-    . ($fechatermino ? " AND f_llegada='$fechatermino'" : "")
+    . ($fechainicio ? " AND f_salida>='$fechainicio'" : "")
+    . ($fechatermino ? " AND f_llegada<='$fechatermino'" : "")
     . ($nombre ? " AND nombre LIKE '%$nombre%'" : "")
     . ($ciudad ? " AND (c1.ciudad_nombre LIKE '%$ciudad%' OR c2.ciudad_nombre LIKE '%$ciudad%' OR c3.ciudad_nombre LIKE '%$ciudad%')": "")
     . "
