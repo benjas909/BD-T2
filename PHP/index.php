@@ -13,6 +13,18 @@
 
 </div>
 
+<?php
+
+$num = rand(1, 5);
+
+if ($num == 5) {
+    echo "<div class='disc-banner'>
+          <h3>¡SOLO PARA TI! 10% DE DESCUENTO EN TU PRÓXIMA COMPRA.</h3>
+          <h4>Para canjearlo, haz click <a href='canje_cupon.php'>aquí</a></h4>
+          </div>";
+}
+?>
+
 <h3> Busqueda: </h3>
 
 <form action="basicsearch.php" method="GET">
