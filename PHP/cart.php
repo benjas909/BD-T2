@@ -76,7 +76,7 @@
             echo "</div>";
         }
 
-        if($_SESSION['cupon']){
+        if(isset($_SESSION['cupon']) && $_SESSION['cupon']) {
             echo "<h2 class='totalprice'><del>Precio total: $$totalprice</del></h2>";
             echo "<h1 class='disc-price'><b>Precio con descuento (10%): $" . ($totalprice * 0.9) . "</b></h1>";
         }
